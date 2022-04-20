@@ -12,9 +12,6 @@ services:
     ports:
       - ${RABBITMQ_PORT:-5672}:5672
       - ${RABBITMQ_MANAGER_PORT:-15672}:15672
-    networks:
-      - back
-
 
   web-service:
     container_name: ${PROJECT_NAME}-web-service
@@ -30,8 +27,6 @@ services:
       WAIT_HOSTS: ${PROJECT_NAME}-rabbitmq:5672
     depends_on:
       - rabbitmq
-    networks:
-      - back
 
   database:
     container_name: ${PROJECT_NAME}-database
@@ -43,8 +38,6 @@ services:
       POSTGRES_MULTIPLE_DATABASES: auth, core
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
-    networks:
-      - back
 
   auth-service:
     container_name: ${PROJECT_NAME}-auth-service
@@ -66,8 +59,6 @@ services:
       - database
     volumes:
       - ./auth-service:/app
-    networks:
-      - back
 
   core-service:
     container_name: ${PROJECT_NAME}-core-service
@@ -90,10 +81,5 @@ services:
       - database
     volumes:
       - ./core-service:/app
-    networks:
-      - back
 
-networks:
-  back:
-    driver: bridge
 
