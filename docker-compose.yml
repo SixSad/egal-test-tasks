@@ -16,6 +16,7 @@ services:
   web-service:
     container_name: ${PROJECT_NAME}-web-service
     image: egalbox/web-service:2.2.1
+    restart: on-failure
     ports:
       - ${WEB_SERVICE_PORT:-80}:8080
     environment:
@@ -44,6 +45,7 @@ services:
     build:
       context: auth-service
     tty: true
+    restart: on-failure
     environment:
       APP_SERVICE_NAME: auth
       APP_SERVICE_KEY: uZsLnAJz35FWUTVx@eg#Xirv6I*jcw2Y
@@ -65,6 +67,7 @@ services:
     build:
       context: core-service
     tty: true
+    restart: on-failure
     environment:
       APP_SERVICE_NAME: core
       APP_SERVICE_KEY: uiA3ZsU#x@ecwgJrv6ITjLV*nzX5FW2Y
