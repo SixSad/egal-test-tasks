@@ -3,86 +3,45 @@ version: "3.6"
 services:
 
   rabbitmq:
-    container_name: ${PROJECT_NAME}-rabbitmq
-    image: ${RABBITMQ_TAG:-bitnami/rabbitmq:latest}
-    environment:
-      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME:-admin}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-password}
-      RABBITMQ_PLUGINS: rabbitmq_management,rabbitmq_consistent_hash_exchange
+    extends:
+      file: ./deploy/docker-compose.yml
+      service: rabbitmq
     ports:
       - ${RABBITMQ_PORT:-5672}:5672
       - ${RABBITMQ_MANAGER_PORT:-15672}:15672
 
   web-service:
-    container_name: ${PROJECT_NAME}-web-service
-    image: egalbox/web-service:2.2.1
-    restart: on-failure
+    extends:
+      file: ./deploy/docker-compose.yml
+      service: web-service
     ports:
       - ${WEB_SERVICE_PORT:-80}:8080
-    environment:
-      PROJECT_NAME: ${PROJECT_NAME}
-      APP_SERVICE_NAME: web
-      RABBITMQ_HOST: ${PROJECT_NAME}-rabbitmq
-      RABBITMQ_USER: ${RABBITMQ_USERNAME:-admin}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-password}
-      WAIT_HOSTS: ${PROJECT_NAME}-rabbitmq:5672
-    depends_on:
-      - rabbitmq
 
   database:
-    container_name: ${PROJECT_NAME}-database
-    image: egalbox/postgres:2.0.0
-    restart: always
+    extends:
+      file: ./deploy/docker-compose.yml
+      service: database
     ports:
       - ${RABBITMQ_PORT:-5432}:5432
-    environment:
-      POSTGRES_MULTIPLE_DATABASES: auth, core
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD:-password}
 
   auth-service:
-    container_name: ${PROJECT_NAME}-auth-service
+    extends:
+      file: ./deploy/docker-compose.yml
+      service: auth-service
     build:
       context: auth-service
-    tty: true
-    restart: on-failure
-    environment:
-      APP_SERVICE_NAME: auth
-      APP_SERVICE_KEY: uZsLnAJz35FWUTVx@eg#Xirv6I*jcw2Y
-      DB_HOST: ${PROJECT_NAME}-database
-      DB_DATABASE: auth
-      DB_PASSWORD: ${DATABASE_PASSWORD:-password}
-      RABBITMQ_HOST: ${PROJECT_NAME}-rabbitmq
-      RABBITMQ_USER: ${RABBITMQ_USERNAME:-admin}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-password}
-      WAIT_HOSTS: ${PROJECT_NAME}-rabbitmq:5672, ${PROJECT_NAME}-database:5432
-    depends_on:
-      - rabbitmq
-      - database
     volumes:
       - ./auth-service:/app
 
   core-service:
-    container_name: ${PROJECT_NAME}-core-service
+    extends:
+      file: ./deploy/docker-compose.yml
+      service: core-service
     build:
       context: core-service
-    tty: true
-    restart: on-failure
-    environment:
-      APP_SERVICE_NAME: core
-      APP_SERVICE_KEY: uiA3ZsU#x@ecwgJrv6ITjLV*nzX5FW2Y
-      DB_HOST: ${PROJECT_NAME}-database
-      DB_USERNAME: postgres
-      DB_DATABASE: core
-      DB_PASSWORD: ${DATABASE_PASSWORD:-password}
-      RABBITMQ_HOST: ${PROJECT_NAME}-rabbitmq
-      RABBITMQ_USER: ${RABBITMQ_USERNAME:-admin}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-password}
-      WAIT_HOSTS: ${PROJECT_NAME}-rabbitmq:5672, ${PROJECT_NAME}-database:5432
-    depends_on:
-      - rabbitmq
-      - database
     volumes:
       - ./core-service:/app
+
+
 
 
