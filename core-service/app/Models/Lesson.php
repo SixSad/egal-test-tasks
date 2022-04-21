@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
@@ -19,5 +21,18 @@ use Egal\Model\Model as EgalModel;
  */
 class Lesson extends EgalModel
 {
+    protected $fillable = [
+        'course_id',
+        'theme',
+    ];
 
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(LessonUser::class);
+    }
+
+    public function courses(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

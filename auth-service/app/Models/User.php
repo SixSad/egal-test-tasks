@@ -21,6 +21,9 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  * @property $id            {@property-type field}  {@primary-key}
  * @property $email         {@property-type field}  {@validation-rules required|string|email|unique:users,email}
  * @property $password      {@property-type field}  {@validation-rules required|string}
+ * @property $phone      {@property-type field}  {@validation-rules required|string}
+ * @property $last_name      {@property-type field}  {@validation-rules required|string}
+ * @property $first_name      {@property-type field}  {@validation-rules required|string}
  * @property $created_at    {@property-type field}
  * @property $updated_at    {@property-type field}
  *
@@ -48,15 +51,15 @@ class User extends BaseUser
         'updated_at',
     ];
 
-    public static function actionRegister(string $email, string $password): User
+    public static function actionRegister(array $attributes = []): User
     {
-        if (!$password) {
+        if (!$attributes['password']) {
             throw new EmptyPasswordException();
         }
 
         $user = new static();
-        $user->setAttribute('email', $email);
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $user->setAttribute('email', $attributes['password']);
+        $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
 
         if (!$hashedPassword) {
             throw new PasswordHashException();

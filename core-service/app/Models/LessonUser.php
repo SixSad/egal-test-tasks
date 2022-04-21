@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
@@ -19,5 +20,19 @@ use Egal\Model\Model as EgalModel;
  */
 class LessonUser extends EgalModel
 {
+    protected $fillable = [
+        'user_id',
+        'lesson_id',
+        'is_passed',
+    ];
 
+    public function singleUser(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function singleLesson(): BelongsTo
+    {
+        return $this->belongsTo(Lesson::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
@@ -19,5 +20,20 @@ use Egal\Model\Model as EgalModel;
  */
 class User extends EgalModel
 {
+    protected $fillable = [
+        'id',
+        'phone',
+        'last_name',
+        'first_name',
+    ];
 
+    public function courses(): HasMany
+    {
+        return $this->hasMany(CourseUser::class);
+    }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(LessonUser::class);
+    }
 }
