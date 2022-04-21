@@ -34,6 +34,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  * @action login                        {@statuses-access guest}
  * @action loginToService               {@statuses-access guest}
  * @action refreshUserMasterToken       {@statuses-access guest}
+ * @action getItems {@statuses-access guest} {@roles-access super_first_role|super_second_role}
  */
 class User extends BaseUser
 {
@@ -58,7 +59,7 @@ class User extends BaseUser
         }
 
         $user = new static();
-        $user->setAttribute('email', $attributes['password']);
+        $user->setAttribute('email', $attributes['email']);
         $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
 
         if (!$hashedPassword) {
