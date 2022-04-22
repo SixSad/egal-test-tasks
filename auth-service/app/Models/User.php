@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CreateUserEvent;
 use App\Exceptions\EmptyPasswordException;
 use App\Exceptions\PasswordHashException;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
@@ -14,6 +15,7 @@ use Egal\Model\Traits\UsesUuidKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
@@ -21,9 +23,9 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  * @property $id            {@property-type field}  {@primary-key}
  * @property $email         {@property-type field}  {@validation-rules required|string|email|unique:users,email}
  * @property $password      {@property-type field}  {@validation-rules required|string}
- * @property $phone      {@property-type field}  {@validation-rules required|string}
- * @property $last_name      {@property-type field}  {@validation-rules required|string}
- * @property $first_name      {@property-type field}  {@validation-rules required|string}
+ * @property $phone         {@property-type fake-field}
+ * @property $first_name         {@property-type fake-field}
+ * @property $last_name         {@property-type fake-field}
  * @property $created_at    {@property-type field}
  * @property $updated_at    {@property-type field}
  *
@@ -43,6 +45,12 @@ class User extends BaseUser
     use HasFactory;
     use HasRelationships;
 
+    protected $fillable = [
+        'phone',
+        'last_name',
+        'first_name'
+    ];
+
     protected $hidden = [
         'password',
     ];
@@ -52,6 +60,10 @@ class User extends BaseUser
         'updated_at',
     ];
 
+    protected $dispatchesEvents = [
+        'creating' => CreateUserEvent::class,
+    ];
+
     public static function actionRegister(array $attributes = []): User
     {
         if (!$attributes['password']) {
@@ -59,7 +71,12 @@ class User extends BaseUser
         }
 
         $user = new static();
+        $user->setAttribute('id', Str::uuid());
+        var_dump($user->id);
         $user->setAttribute('email', $attributes['email']);
+        $user->setAttribute('phone', $attributes['phone']);
+        $user->setAttribute('first_name', $attributes['first_name']);
+        $user->setAttribute('last_name', $attributes['last_name']);
         $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
 
         if (!$hashedPassword) {
@@ -67,6 +84,7 @@ class User extends BaseUser
         }
 
         $user->setAttribute('password', $hashedPassword);
+
         $user->save();
 
         return $user;

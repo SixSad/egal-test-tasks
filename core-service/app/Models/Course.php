@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $title {@property-type field}
- * @property $student_capacity {@property-type field}
- * @property $start_date {@property-type field}
- * @property $end_date {@property-type field}
- * @property $has_certificate {@property-type field}
+ * @property $title {@property-type field} {@validation-rules required|string}
+ * @property $student_capacity {@property-type field} {@validation-rules required|string}
+ * @property $start_date {@property-type field} {@validation-rules required|string}
+ * @property $end_date {@property-type field} {@validation-rules required|string}
+ * @property $has_certificate {@property-type field} {@validation-rules required|string}
  * @property Carbon $created_at    {@property-type field}
  * @property Carbon $updated_at    {@property-type field}
  *
- * @action getMetadata {@statuses-access guest|logged}
- * @action getItem {@statuses-access guest|logged}
+ * @action getMetadata {@statuses-access logged}
+ * @action getItem {@statuses-access logged}
  * @action getItems {@statuses-access guest} {@roles-access super_first_role|super_second_role}
  * @action create {@statuses-access guest} {@roles-access super_first_role,super_second_role}
  * @action update {@statuses-access guest} {@permissions-access super_first_permission|super_second_permission}
