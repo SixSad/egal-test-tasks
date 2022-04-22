@@ -15,7 +15,7 @@ class DropServicesTable extends Migration
     public function down()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->string('id')->primary()->unique();
+            $table->uuid('id')->primary();
             $table->string('name')->unique();
             $table->string('key');
             $table->timestamps();

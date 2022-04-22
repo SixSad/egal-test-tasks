@@ -11,7 +11,6 @@ use Egal\Auth\Tokens\UserServiceToken;
 use Egal\AuthServiceDependencies\Exceptions\LoginException;
 use Egal\AuthServiceDependencies\Exceptions\UserNotIdentifiedException;
 use Egal\AuthServiceDependencies\Models\User as BaseUser;
-use Egal\Model\Traits\UsesUuidKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
@@ -40,12 +39,14 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  */
 class User extends BaseUser
 {
-
-    use UsesUuidKey;
     use HasFactory;
     use HasRelationships;
 
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
     protected $fillable = [
+        'id',
         'phone',
         'last_name',
         'first_name'
@@ -72,7 +73,6 @@ class User extends BaseUser
 
         $user = new static();
         $user->setAttribute('id', Str::uuid());
-        var_dump($user->id);
         $user->setAttribute('email', $attributes['email']);
         $user->setAttribute('phone', $attributes['phone']);
         $user->setAttribute('first_name', $attributes['first_name']);

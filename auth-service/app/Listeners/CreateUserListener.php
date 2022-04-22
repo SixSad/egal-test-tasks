@@ -3,6 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
+use Egal\Model\Exceptions\ValidateException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class CreateUserListener
@@ -25,10 +27,19 @@ class CreateUserListener
      */
     public function handle(CreateUserEvent $event): void
     {
-        print_r($event->user->id);
-        var_dump($event->user->first_name);
-        var_dump($event->user->last_name);
-        var_dump($event->user->phone);
+        $validator = Validator::make($event->user->getAttributes(), [
+            'phone' => 'required|max:255',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            $exception = new ValidateException();
+            $exception->setMessageBag($validator->errors());
+
+            throw $exception;
+        }
+
         $request = new \Egal\Core\Communication\Request(
             'core',
             'User',
@@ -39,16 +50,9 @@ class CreateUserListener
                     'phone' => $event->user->phone,
                     'first_name' => $event->user->first_name,
                     'last_name' => $event->user->last_name
-            ]]
+                ]]
         );
-        $request->call();
-        $response = $request->getResponse();
-        var_dump($response);
-        if ($response->getStatusCode() != 200) {
-            $actionErrorMessage = $response->getActionErrorMessage(); // Получение сообщения ошибки
-        } else {
-            $actionResultMessage = $response->getActionResultMessage(); // Получение сообщения результата выполнения [действия](/_glossary?id=действия) }
-        }
+        $request->send();
 
         $event->user->offsetUnset('phone');
         $event->user->offsetUnset('first_name');
