@@ -40,7 +40,8 @@ services:
     restart: on-failure
     environment:
       APP_SERVICE_NAME: auth
-      APP_SERVICE_KEY: uZsLnAJz35FWUTVx@eg#Xirv6I*jcw2Y
+      APP_SERVICE_KEY: zF0aM@I5*D2UTBurR6ijspGQ^f#VXxky
+      APP_SERVICES: core:Z28jL*3l6c^qJ7VsnxNaYBg%Pei1MEFI
       DB_HOST: ${PROJECT_NAME:-project}-database
       DB_DATABASE: auth
       DB_PASSWORD: ${DATABASE_PASSWORD:-password}
@@ -58,7 +59,7 @@ services:
     restart: on-failure
     environment:
       APP_SERVICE_NAME: core
-      APP_SERVICE_KEY: uiA3ZsU#x@ecwgJrv6ITjLV*nzX5FW2Y
+      APP_SERVICE_KEY: Z28jL*3l6c^qJ7VsnxNaYBg%Pei1MEFI
       DB_HOST: ${PROJECT_NAME:-project}-database
       DB_USERNAME: postgres
       DB_DATABASE: core

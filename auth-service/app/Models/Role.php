@@ -5,6 +5,7 @@ namespace App\Models;
 use Egal\Model\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Session;
 
 /**
  * @property $id {@primary-key} {@property-type field} {@validation-rules required|string|unique:permissions}
@@ -65,6 +66,7 @@ class Role extends Model
 
     public function permissions(): BelongsToMany
     {
+
         return $this->belongsToMany(Permission::class, 'role_permissions');
     }
 

@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Events\CreateUserEvent;
 use App\Listeners\CreateUserListener;
 use Egal\Core\Events\EventServiceProvider as ServiceProvider;
+use Egal\Core\Events\UserServiceTokenDetectedEvent;
+use App\Listeners\AddingRoleToUserServiceTokenListener;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -28,7 +30,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         CreateUserEvent::class => [
             CreateUserListener::class
-        ]
+        ],
     ];
 
 }

@@ -5,23 +5,24 @@ namespace App\Models;
 use Carbon\Carbon;
 use Egal\Model\Model as EgalModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $title {@property-type field} {@validation-rules required|string}
- * @property $student_capacity {@property-type field} {@validation-rules required|string}
- * @property $start_date {@property-type field} {@validation-rules required|string}
- * @property $end_date {@property-type field} {@validation-rules required|string}
- * @property $has_certificate {@property-type field} {@validation-rules required|string}
+ * @property $title {@property-type field} {@validation-rules required|unique:courses|regex:/(^([a-z,0-9]+)?$)/ui}
+ * @property $student_capacity {@property-type field} {@validation-rules required|integer|between:5,99}
+ * @property $start_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after_or_equal:date}
+ * @property $end_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after:start_date}
+ * @property $has_certificate {@property-type field} {@validation-rules required|boolean}
  * @property Carbon $created_at    {@property-type field}
  * @property Carbon $updated_at    {@property-type field}
  *
- * @action getMetadata {@statuses-access logged}
- * @action getItem {@statuses-access logged}
- * @action getItems {@statuses-access guest} {@roles-access super_first_role|super_second_role}
- * @action create {@statuses-access guest} {@roles-access super_first_role,super_second_role}
- * @action update {@statuses-access guest} {@permissions-access super_first_permission|super_second_permission}
- * @action delete {@statuses-access guest} {@permissions-access super_first_permission,super_second_permission}
+ * @action getMetadata {@statuses-access logged} {@roles-access admin}
+ * @action getItem {@statuses-access logged} {@roles-access admin}
+ * @action getItems {@statuses-access logged} {@roles-access admin}
+ * @action create {@statuses-access logged} {@roles-access admin}
+ * @action update {@statuses-access logged} {@roles-access admin}{@permissions-access admin}
+ * @action delete {@statuses-access logged} {@roles-access admin}{@permissions-access admin}
  */
 class Course extends EgalModel
 {
