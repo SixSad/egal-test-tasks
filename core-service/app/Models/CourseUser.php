@@ -2,21 +2,24 @@
 
 namespace App\Models;
 
+
+use App\Events\CreateCourseUserEvent;
 use Egal\Model\Model as EgalModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $name {@property-type field} {@validation-rules required|string}
+ * @property $user_id {@property-type field}
+ * @property $course_id {@property-type field}
+ * @property $percentage_passing {@property-type field}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
  *
- * @action getMetadata {@statuses-access guest|logged}
- * @action getItem {@statuses-access guest|logged}
- * @action getItems {@statuses-access logged} {@roles-access super_first_role|super_second_role}
- * @action create {@statuses-access logged} {@roles-access super_first_role,super_second_role}
- * @action update {@statuses-access logged} {@permissions-access super_first_permission|super_second_permission}
- * @action delete {@statuses-access logged} {@permissions-access super_first_permission,super_second_permission}
+ * @action getMetadata {@statuses-access logged}{@roles-access admin}
+ * @action getItem {@statuses-access logged}{@roles-access admin}
+ * @action getItems {@statuses-access logged} {@roles-access admin}
+ * @action create {@statuses-access logged} {@roles-access user}
+ * @action delete {@statuses-access logged} {@roles-access user}
  */
 class CourseUser extends EgalModel
 {
@@ -24,6 +27,15 @@ class CourseUser extends EgalModel
         'user_id',
         'course_id',
         'percentage_passing',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    protected $dispatchesEvents = [
+        'creating' => CreateCourseUserEvent::class
     ];
 
     public function singleCourse(): BelongsTo

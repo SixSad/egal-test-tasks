@@ -8,9 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CreateUserEvent extends Event
 {
-    use SerializesModels;
 
-    public $user;
+    public User $user;
     /**
      * Create a new event instance.
      *

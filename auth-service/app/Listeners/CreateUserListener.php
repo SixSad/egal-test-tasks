@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\CreateUserEvent as CreateUserEvent;
 use Egal\Model\Exceptions\ValidateException;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+
 
 class CreateUserListener
 {

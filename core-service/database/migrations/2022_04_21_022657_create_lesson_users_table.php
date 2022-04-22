@@ -18,6 +18,7 @@ class CreateLessonUsersTable extends Migration
             $table->foreignUuid('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('lesson_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('is_passed')->nullable(false)->default(false);
+            $table->timestamps();
         });
     }
 

@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use App\Events\CreateUserEvent;
-use App\Listeners\CreateUserListener;
+use App\Events\CourseUserCreatingEvent;
+use App\Events\CreateCourseUserEvent;
+use App\Listeners\CheckCourseUserListener;
+use App\Listeners\CheckFreePlacesListener;
+use App\Listeners\CheckUserUidListener;
 use Egal\Core\Events\EventServiceProvider as ServiceProvider;
-use Egal\Core\Events\UserServiceTokenDetectedEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,7 +19,7 @@ class EventServiceProvider extends ServiceProvider
         'service' => [
             'Model' => [
                 'event-message' => [
-                    ExampleListener::class
+
                 ]
             ]
         ]
@@ -27,9 +29,10 @@ class EventServiceProvider extends ServiceProvider
      * Определение обработчиков локальных событий
      */
     protected $listen = [
-        CreateUserEvent::class => [
-            CreateUserListener::class
-        ],
+        CreateCourseUserEvent::class => [
+            CheckCourseUserListener::class,
+            CheckFreePlacesListener::class
+        ]
     ];
 
 }

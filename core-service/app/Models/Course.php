@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Auth;
  * @action getItem {@statuses-access logged} {@roles-access admin}
  * @action getItems {@statuses-access logged} {@roles-access admin}
  * @action create {@statuses-access logged} {@roles-access admin}
- * @action update {@statuses-access logged} {@roles-access admin}{@permissions-access admin}
- * @action delete {@statuses-access logged} {@roles-access admin}{@permissions-access admin}
+ * @action update {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}
+ * @action delete {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}
  */
 class Course extends EgalModel
 {
