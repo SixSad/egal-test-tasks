@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
+use Egal\Core\Listeners\EventListener;
 use Egal\Model\Exceptions\ValidateException;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,5 +59,4 @@ class CreateUserListener
         $event->user->offsetUnset('first_name');
         $event->user->offsetUnset('last_name');
     }
-
 }

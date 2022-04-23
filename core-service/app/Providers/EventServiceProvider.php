@@ -3,10 +3,8 @@
 namespace App\Providers;
 
 use App\Events\CourseUserCreatingEvent;
-use App\Events\CreateCourseUserEvent;
-use App\Listeners\CheckCourseUserListener;
-use App\Listeners\CheckFreePlacesListener;
-use App\Listeners\CheckUserUidListener;
+use App\Listeners\CheckUserUUIDListener;
+use App\Listeners\CourseFreePlacesListener;
 use Egal\Core\Events\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -19,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
         'service' => [
             'Model' => [
                 'event-message' => [
-
+                    ExampleListener::class
                 ]
             ]
         ]
@@ -29,9 +27,9 @@ class EventServiceProvider extends ServiceProvider
      * Определение обработчиков локальных событий
      */
     protected $listen = [
-        CreateCourseUserEvent::class => [
-            CheckCourseUserListener::class,
-            CheckFreePlacesListener::class
+        CourseUserCreatingEvent::class => [
+            CheckUserUUIDListener::class,
+            CourseFreePlacesListener::class,
         ]
     ];
 
