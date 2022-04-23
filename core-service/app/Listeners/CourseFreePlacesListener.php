@@ -2,15 +2,26 @@
 
 namespace App\Listeners;
 
-use Egal\Core\Listeners\GlobalEventListener;
-use Egal\Core\Listeners\EventListener;
+use App\Events\CourseUserCreatingEvent;
+use App\Exceptions\FreePlaceException;
+use App\Models\Course;
+use App\Models\CourseUser;
 
-class CourseFreePlacesListener extends EventListener
+
+class CourseFreePlacesListener
 {
-
-    public function handle(): void
+    /**
+     * @throws FreePlaceException
+     */
+    public function handle(CourseUserCreatingEvent $event): void
     {
-        // TODO: Реализуйте метод handle().
+        $model = $event->getModel();
+        $course = Course::firstWhere("id", $model->getAttribute('course_id'));
+
+        var_dump($course->getAttribute('student_capacity'));
+        if ($course->getAttribute('student_capacity') < 1) {
+            throw new FreePlaceException();
+        }
     }
 
 }

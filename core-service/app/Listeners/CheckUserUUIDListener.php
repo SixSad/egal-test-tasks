@@ -3,20 +3,28 @@
 namespace App\Listeners;
 
 use App\Events\CourseUserCreatingEvent;
+use Egal\Core\Session\Session;
+use App\Exceptions\UUIDException;
 
-use Egal\Core\Listeners\EventListener;
 
-class CheckUserUUIDListener extends EventListener
+class CheckUserUUIDListener
 {
 
-    public function __construct(CourseUserCreatingEvent $event)
+    public function __construct()
     {
-        print_r($event->courseUser->getAttributes());
+
     }
 
-    public function handle(): void
+    /**
+     * @throws UUIDException
+     */
+    public function handle(CourseUserCreatingEvent $event): void
     {
+        $model = $event->getModel();
 
+        if ($model->getAttribute('user_id') !== Session::getUserServiceToken()->getUid()) {
+            throw new UUIDException();
+        }
     }
 
 }

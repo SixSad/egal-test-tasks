@@ -74,9 +74,6 @@ class User extends BaseUser
         $user = new static();
         $user->setAttribute('id', Str::uuid());
         $user->setAttribute('email', $attributes['email']);
-        $user->setAttribute('phone', $attributes['phone']);
-        $user->setAttribute('first_name', $attributes['first_name']);
-        $user->setAttribute('last_name', $attributes['last_name']);
         $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
 
         if (!$hashedPassword) {
@@ -84,7 +81,6 @@ class User extends BaseUser
         }
 
         $user->setAttribute('password', $hashedPassword);
-
         $user->save();
 
         return $user;

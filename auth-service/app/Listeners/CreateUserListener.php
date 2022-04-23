@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
 use Egal\Core\Listeners\EventListener;
+use Egal\Core\Session\Session;
 use Egal\Model\Exceptions\ValidateException;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,10 +26,13 @@ class CreateUserListener
      *
      * @param CreateUserEvent $event
      * @return void
+     * @throws ValidateException
      */
     public function handle(CreateUserEvent $event): void
     {
-        $validator = Validator::make($event->user->getAttributes(), [
+        $attributes = Session::getActionMessage()->getParameters()['attributes'];
+
+        $validator = Validator::make($attributes, [
             'phone' => 'required|max:255',
             'first_name' => 'required|string',
             'last_name' => 'required|string'
@@ -48,15 +52,12 @@ class CreateUserListener
             [
                 'attributes' => [
                     'id' => $event->user->id,
-                    'phone' => $event->user->phone,
-                    'first_name' => $event->user->first_name,
-                    'last_name' => $event->user->last_name
+                    'phone' => $attributes['phone'],
+                    'first_name' => $attributes['first_name'],
+                    'last_name' => $attributes['last_name']
                 ]]
         );
-        $request->send();
 
-        $event->user->offsetUnset('phone');
-        $event->user->offsetUnset('first_name');
-        $event->user->offsetUnset('last_name');
+        $request->send();
     }
 }

@@ -6,7 +6,7 @@ use App\Models\CourseUser;
 use Egal\Core\Events\Event;
 use Illuminate\Queue\SerializesModels;
 
-class CourseUserCreatingEvent extends Event
+class CourseUserCreatedEvent extends Event
 {
     use SerializesModels;
 

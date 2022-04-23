@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 /**
  * @property $id {@property-type field} {@prymary-key}
  * @property $title {@property-type field} {@validation-rules required|unique:courses|regex:/(^([a-z,0-9]+)?$)/ui}
- * @property $student_capacity {@property-type field} {@validation-rules required|integer|between:5,99}
+ * @property $student_capacity {@property-type field} {@validation-rules required|integer|between:0,99}
  * @property $start_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after_or_equal:date}
  * @property $end_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after:start_date}
  * @property $has_certificate {@property-type field} {@validation-rules required|boolean}

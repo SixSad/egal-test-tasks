@@ -3,8 +3,8 @@
 namespace App\Models;
 
 
+use App\Events\CourseUserCreatedEvent;
 use App\Events\CourseUserCreatingEvent;
-use App\Events\CreateCourseUserEvent;
 use Egal\Model\Model as EgalModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -37,6 +37,7 @@ class CourseUser extends EgalModel
 
     protected $dispatchesEvents = [
         'creating' => CourseUserCreatingEvent::class,
+        'created' => CourseUserCreatedEvent::class
     ];
 
     public function singleCourse(): BelongsTo
