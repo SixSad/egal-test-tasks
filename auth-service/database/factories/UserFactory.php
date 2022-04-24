@@ -15,6 +15,9 @@ class UserFactory extends Factory
         return [
             'email' => $this->faker->email,
             'password' => $this->faker->password,
+            'phone' => "+".random_int(1,99).random_int(0,999).random_int(0,999).random_int(0,99).random_int(0,99),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
         ];
     }
 
