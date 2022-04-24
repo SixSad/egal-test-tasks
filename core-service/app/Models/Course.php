@@ -42,13 +42,13 @@ class Course extends EgalModel
     ];
 
 
-    public function courses(): HasMany
+    public function courseUsers(): HasMany
     {
-        return $this->hasMany(CourseUser::class);
+        return $this->hasMany(CourseUser::class, 'course_id');
     }
 
     public function lessons(): HasMany
     {
-        return $this->hasMany(LessonUser::class);
+        return $this->hasMany(Lesson::class, 'course_id');
     }
 }

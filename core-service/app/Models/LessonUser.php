@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property $id {@property-type field} {@prymary-key}
  * @property $user_id {@property-type relation}
- * @property $lesson_id {@property-type relation} {@validation-rules required|integer|self_update}
+ * @property $lesson_id {@property-type relation} {@validation-rules required|integer}
  * @property $is_passed {@property-type field}{@validation-rules required|boolean}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
@@ -41,13 +41,13 @@ class LessonUser extends EgalModel
         'updated' => UpdatedLessonUserEvent::class
     ];
 
-    public function singleUser(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function singleLesson(): BelongsTo
+    public function lesson(): BelongsTo
     {
-        return $this->belongsTo(Lesson::class);
+        return $this->belongsTo(Lesson::class, 'lesson_id');
     }
 }

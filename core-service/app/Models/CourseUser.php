@@ -39,7 +39,7 @@ class CourseUser extends EgalModel
 
     public function singleCourse(): BelongsTo
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Course::class,'course_id');
     }
 
 }
