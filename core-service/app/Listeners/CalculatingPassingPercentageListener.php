@@ -13,16 +13,13 @@ use App\Models\LessonUser;
 class CalculatingPassingPercentageListener
 {
 
-    /**
-     * @throws AlreadyPassedException
-     */
     public function handle(UpdatedLessonUserEvent $event): void
     {
         $model = $event->getModel();
 
         $course_id = Lesson::query()->find($model->getAttribute('lesson_id'))->getAttribute('course_id');
 
-        $course = CourseUser::query()->where([
+        $course = CourseUser::query()->firstWhere([
             'course_id' => $course_id,
             'user_id' => $model->getAttribute('user_id')
         ])->first();
