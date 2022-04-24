@@ -36,10 +36,11 @@ class Course extends EgalModel
         'has_certificate'
     ];
 
-    protected $hidden = [
+    protected $guarder = [
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
+
 
     public function courses(): HasMany
     {

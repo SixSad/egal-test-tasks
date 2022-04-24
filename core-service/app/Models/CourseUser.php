@@ -10,17 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $user_id {@property-type field}
- * @property $course_id {@property-type field}
+ * @property $user_id {@property-type relation} {@validation-rules required|uuid}
+ * @property $course_id {@property-type relation} {@validation-rules required|integer|exists:App\Models\Course,id|unique_course_user}
  * @property $percentage_passing {@property-type field}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
  *
- * @action getMetadata {@statuses-access logged}{@roles-access admin}
- * @action getItem {@statuses-access logged}{@roles-access admin}
- * @action getItems {@statuses-access logged} {@roles-access admin}
  * @action create {@statuses-access logged} {@roles-access user}
- * @action delete {@statuses-access logged} {@roles-access user}
  */
 class CourseUser extends EgalModel
 {
@@ -30,10 +26,11 @@ class CourseUser extends EgalModel
         'percentage_passing',
     ];
 
-    protected $hidden = [
+    protected $guarder = [
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
+
 
     protected $dispatchesEvents = [
         'creating' => CourseUserCreatingEvent::class,

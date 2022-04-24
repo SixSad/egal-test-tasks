@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $course_id {@property-type field} {@validation-rules required|string}
+ * @property $course_id {@property-type relation} {@validation-rules required|integer|exists:App\Models\Course,id}
  * @property $theme {@property-type field} {@validation-rules required|string}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
@@ -27,10 +27,11 @@ class Lesson extends EgalModel
         'theme',
     ];
 
-    protected $hidden = [
+    protected $guarder = [
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
+
 
     public function lessons(): HasMany
     {

@@ -18,7 +18,6 @@ class CourseFreePlacesListener
         $model = $event->getModel();
         $course = Course::firstWhere("id", $model->getAttribute('course_id'));
 
-        var_dump($course->getAttribute('student_capacity'));
         if ($course->getAttribute('student_capacity') < 1) {
             throw new FreePlaceException();
         }

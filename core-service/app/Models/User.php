@@ -30,6 +30,11 @@ class User extends EgalModel
         'first_name',
     ];
 
+    protected $guarder = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function courses(): HasMany
     {
         return $this->hasMany(CourseUser::class);

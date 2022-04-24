@@ -3,7 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\CourseUserCreatedEvent;
-use App\Models\Course;
+use App\Models\Lesson;
+use App\Models\LessonUser;
 
 
 class CreateLessonUserListener
@@ -12,10 +13,16 @@ class CreateLessonUserListener
     public function handle(CourseUserCreatedEvent $event): void
     {
         $model = $event->getModel();
-        $course = Course::firstWhere("id", $model->getAttribute('course_id'));
-        $course->update([
-            'student_capacity' => $course->student_capacity - 1,
-        ]);
+        $attributes = $model->getAttributes();
+        $lessons = Lesson::query()->where('course_id',$attributes['course_id'])->get();
+
+        foreach ($lessons as $lesson) {
+            LessonUser::query()->create([
+                'user_id' => $attributes['user_id'],
+                'lesson_id' => $lesson->id,
+                'is_passed' => 0
+            ]);
+        }
     }
 
 }

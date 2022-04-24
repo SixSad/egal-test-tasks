@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use App\Events\CourseUserCreatedEvent;
 use App\Events\CourseUserCreatingEvent;
+use App\Events\UpdatedLessonUserEvent;
+use App\Events\UpdatingLessonUserEvent;
+use App\Listeners\CalculatingPassingPercentageListener;
+use App\Listeners\CheckUpdatingFieldsListener;
 use App\Listeners\CheckUserUUIDListener;
 use App\Listeners\CourseFreePlacesListener;
 use App\Listeners\CreateLessonUserListener;
@@ -32,12 +36,18 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         CourseUserCreatingEvent::class => [
             CheckUserUUIDListener::class,
-            CourseFreePlacesListener::class,
+            CourseFreePlacesListener::class
         ],
         CourseUserCreatedEvent::class => [
             RefreshFreePlacesListener::class,
-            CreateLessonUserListener::class,
+            CreateLessonUserListener::class
         ],
+        UpdatingLessonUserEvent::class => [
+            CheckUpdatingFieldsListener::class
+        ],
+        UpdatedLessonUserEvent::class => [
+            CalculatingPassingPercentageListener::class
+        ]
     ];
 
 }
