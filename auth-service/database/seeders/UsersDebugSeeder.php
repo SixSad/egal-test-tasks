@@ -44,7 +44,7 @@ class UsersDebugSeeder extends Seeder
             [
                 'attributes' => [
                     'id' => $user->id,
-                    'phone' => "+" . random_int(1, 99) . random_int(0, 999) . random_int(0, 999) . random_int(0, 99) . random_int(0, 99),
+                    'phone' => "+" . $this->faker->phone,
                     'first_name' => $this->faker->firstName,
                     'last_name' => $this->faker->lastName
                 ]]

@@ -42,12 +42,6 @@ services:
     volumes:
       - ./core-service:/app
 
-#  pgadmin:
-#    extends:
-#      file: ./deploy/docker-compose.yml
-#      service: pgadmin
-#
-
   adminer:
     extends:
       file: ./deploy/docker-compose.yml

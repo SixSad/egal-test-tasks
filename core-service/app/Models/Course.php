@@ -4,15 +4,18 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
  * @property $title {@property-type field} {@validation-rules required|unique:courses|regex:/(^([a-z,0-9]+)?$)/ui}
  * @property $student_capacity {@property-type field} {@validation-rules required|integer|between:0,99}
- * @property $start_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after_or_equal:date}
- * @property $end_date {@property-type field} {@validation-rules required|date_format:Y-m-d|after:start_date}
+ * @property $start_date {@property-type field} {@validation-rules required|date|after_or_equal:date}
+ * @property $end_date {@property-type field} {@validation-rules required|date|after:start_date}
  * @property $has_certificate {@property-type field} {@validation-rules required|boolean}
  * @property Carbon $created_at    {@property-type field}
  * @property Carbon $updated_at    {@property-type field}
@@ -26,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class Course extends EgalModel
 {
-    public $timestamps = false;
+    use HasFactory;
 
     protected $fillable = [
         'title',
@@ -42,9 +45,9 @@ class Course extends EgalModel
     ];
 
 
-    public function courseUsers(): HasMany
+    public function courseUsers(): BelongsToMany
     {
-        return $this->hasMany(CourseUser::class, 'course_id');
+        return $this->belongsToMany(User::class, 'course_users','course_id','user_id');
     }
 
     public function lessons(): HasMany

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -23,6 +25,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class User extends EgalModel
 {
+    use HasFactory;
+
+    public $incrementing = false;
+
     protected $fillable = [
         'id',
         'phone',
@@ -35,9 +41,9 @@ class User extends EgalModel
         'updated_at'
     ];
 
-    public function courses(): HasMany
+    public function courses(): BelongsToMany
     {
-        return $this->hasMany(CourseUser::class);
+        return $this->belongsToMany(Course::class, 'course_users', 'user_id', 'course_id');
     }
 
     public function lessons(): HasMany

@@ -73,17 +73,7 @@ services:
       - rabbitmq
       - database
 
-  #  pgadmin:
-  #    container_name: pgadmin
-  #    image: dpage/pgadmin4
-  #
-  #    environment:
-  #      PGADMIN_DEFAULT_EMAIL: email@mail.com
-  #      PGADMIN_DEFAULT_PASSWORD: 123456
-  #
-  #    ports:
-  #      - "5050:80"
-  #
+
   adminer:
     image: adminer
     restart: always

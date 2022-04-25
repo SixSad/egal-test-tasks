@@ -37,9 +37,4 @@ class CourseUser extends EgalModel
         'created' => CourseUserCreatedEvent::class
     ];
 
-    public function singleCourse(): BelongsTo
-    {
-        return $this->belongsTo(Course::class,'course_id');
-    }
-
 }

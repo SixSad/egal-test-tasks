@@ -18,9 +18,6 @@ class UserFactory extends Factory
             'id' => Str::uuid(),
             'email' => $this->faker->email,
             'password' => Hash::make(Str::random(10)),
-//            'phone' => "+" . random_int(1, 99) . random_int(0, 999) . random_int(0, 999) . random_int(0, 99) . random_int(0, 99),
-//            'last_name' => $this->faker->firstName,
-//            'first_name' => $this->faker->lastName
         ];
     }
 

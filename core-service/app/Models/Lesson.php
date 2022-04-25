@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Egal\Model\Model as EgalModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
@@ -22,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Lesson extends EgalModel
 {
+    use HasFactory;
+
     protected $fillable = [
         'course_id',
         'theme',
