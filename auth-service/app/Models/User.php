@@ -61,9 +61,9 @@ class User extends BaseUser
         'updated_at',
     ];
 
-    protected $dispatchesEvents = [
-        'creating' => CreateUserEvent::class,
-    ];
+//    protected $dispatchesEvents = [
+//        'creating' => CreateUserEvent::class,
+//    ];
 
     public static function actionRegister(array $attributes = []): User
     {

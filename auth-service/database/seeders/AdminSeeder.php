@@ -8,7 +8,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class UserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     protected $faker;
 
@@ -19,22 +19,22 @@ class UserSeeder extends Seeder
 
     public function run()
     {
-        $userScheme = [
+        $adminScheme = [
             'id' => Str::uuid(),
-            'email' => 'user2@user.ru',
-            'password' => 'user'
+            'email' => 'admin2@user.ru',
+            'password' => 'admin'
         ];
 
-        if (!User::query()->where('email',$userScheme['email'])->first()) {
-            $user = User::query()->create($userScheme);
-
+        if (!User::query()->where('email',$adminScheme['email'])->first()) {
+            $admin = User::query()->create($adminScheme);
+            $admin->roles()->attach('admin');
             $request = new \Egal\Core\Communication\Request(
                 'core',
                 'User',
                 'create',
                 [
                     'attributes' => [
-                        'id' => $user->id,
+                        'id' => $admin->id,
                         'phone' => "+" . random_int(1, 99) . random_int(0, 999) . random_int(0, 999) . random_int(0, 99) . random_int(0, 99),
                         'first_name' => $this->faker->firstName,
                         'last_name' => $this->faker->lastName
