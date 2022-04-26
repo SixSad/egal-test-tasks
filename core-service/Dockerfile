@@ -24,15 +24,17 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 
 # Preparing code base
-COPY composer.json .
-COPY composer.lock .
-RUN composer install --no-interaction --no-progress --no-autoloader --no-cache \
-    $(if [ $DEBUG == 'true' ]; then echo '--dev'; else echo '--no-dev'; fi)
-COPY . .
-RUN composer dump-autoload
+#COPY composer.json .
+#COPY composer.lock .
+#RUN composer install --no-interaction --no-progress --no-autoloader --no-cache \
+#    $(if [ $DEBUG == 'true' ]; then echo '--dev'; else echo '--no-dev'; fi)
+#COPY . .
+#RUN composer dump-autoload
 
 # Cleanup before run
-RUN if [ $DEBUG == 'false' ]; then rm /usr/bin/composer; fi
+#RUN if [ $DEBUG == 'false' ]; then rm /usr/bin/composer; fi
 
-CMD /wait && php artisan migrate --force  && php artisan egal:run
+CMD /wait && sleep 15 && composer install --no-interaction --no-progress --no-autoloader --no-cache \
+    && composer dump-autoload && php artisan migrate --force  && php artisan egal:run
+
 
