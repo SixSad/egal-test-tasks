@@ -34,7 +34,7 @@ WORKDIR /app
 # Cleanup before run
 #RUN if [ $DEBUG == 'false' ]; then rm /usr/bin/composer; fi
 
-CMD /wait && sleep 15 && composer install --no-interaction --no-progress --no-autoloader --no-cache \
+CMD /wait && composer install --no-interaction --no-progress --no-autoloader --no-cache \
     && composer dump-autoload && php artisan migrate --force  && php artisan egal:run
 
 
