@@ -41,13 +41,4 @@ class LessonUser extends EgalModel
         'updated' => UpdatedLessonUserEvent::class
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function lesson(): BelongsTo
-    {
-        return $this->belongsTo(Lesson::class, 'lesson_id');
-    }
 }

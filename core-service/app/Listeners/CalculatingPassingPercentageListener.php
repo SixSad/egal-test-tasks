@@ -16,23 +16,21 @@ class CalculatingPassingPercentageListener
     public function handle(UpdatedLessonUserEvent $event): void
     {
         $model = $event->getModel();
+        $course = Lesson::query()->find($model->getAttribute('lesson_id'))->course;
+        $countLessons = $course->lessons->count();
 
-        $course_id = Lesson::query()->find($model->getAttribute('lesson_id'))->getAttribute('course_id');
-
-        $course = CourseUser::query()->firstWhere([
-            'course_id' => $course_id,
+        $courseUser = CourseUser::query()->where([
+            'course_id' => $course->getAttribute('id'),
             'user_id' => $model->getAttribute('user_id')
-        ])->first();
+        ]);
 
-        $countLessons = $course->singleCourse->lessons->count();
-        $countPassed = LessonUser::query()->whereIn('lesson_id', $course->singleCourse->lessons->pluck('id'))
+        $countPassed = LessonUser::query()->whereIn('lesson_id', $course->lessons->pluck('id'))
             ->where([
                 'user_id' => $model->getAttribute('user_id'),
                 'is_passed' => true
             ])->count();
 
-        $course->update(['percentage_passing' => (int)(($countPassed / $countLessons) * 100)]);
-
+        $courseUser->update(['percentage_passing' => (int)(($countPassed / $countLessons) * 100)]);
     }
 
 }

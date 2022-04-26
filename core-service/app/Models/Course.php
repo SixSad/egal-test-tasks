@@ -22,7 +22,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  *
  * @action getMetadata {@statuses-access logged} {@roles-access admin}
  * @action getItem {@statuses-access logged} {@roles-access admin}
- * @action getItems {@statuses-access logged} {@roles-access admin}
+ * @action getItems {@statuses-access logged} {@roles-access admin|user}
  * @action create {@statuses-access logged} {@roles-access admin}
  * @action update {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}
  * @action delete {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}

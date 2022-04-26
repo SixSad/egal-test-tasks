@@ -34,5 +34,5 @@ RUN composer dump-autoload
 # Cleanup before run
 RUN if [ $DEBUG == 'false' ]; then rm /usr/bin/composer; fi
 
-CMD /wait && php artisan migrate --force --seed && php artisan egal:run
+CMD /wait && php artisan migrate --force  && php artisan egal:run
 

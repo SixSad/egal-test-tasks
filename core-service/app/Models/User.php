@@ -46,9 +46,9 @@ class User extends EgalModel
         return $this->belongsToMany(Course::class, 'course_users', 'user_id', 'course_id');
     }
 
-    public function lessons(): HasMany
+    public function lessons(): BelongsToMany
     {
-        return $this->hasMany(LessonUser::class);
+        return $this->belongsToMany(Lesson::class, 'lesson_users', 'user_id', 'lesson_id');
     }
 
 }

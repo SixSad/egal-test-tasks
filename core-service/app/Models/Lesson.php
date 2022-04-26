@@ -5,6 +5,7 @@ namespace App\Models;
 use Egal\Model\Model as EgalModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
@@ -37,9 +38,9 @@ class Lesson extends EgalModel
     ];
 
 
-    public function lessonUsers(): HasMany
+    public function users(): BelongsToMany
     {
-        return $this->hasMany(LessonUser::class, 'lesson_id');
+        return $this->belongsToMany(User::class, 'lesson_users', 'lesson_id', 'user_id');
     }
 
     public function course(): BelongsTo
