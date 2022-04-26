@@ -6,6 +6,7 @@ use App\Models\User;
 use Faker\Generator;
 use Illuminate\Container\Container;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AdminSeeder extends Seeder
@@ -21,8 +22,8 @@ class AdminSeeder extends Seeder
     {
         $adminScheme = [
             'id' => Str::uuid(),
-            'email' => 'admin2@user.ru',
-            'password' => 'admin'
+            'email' => 'admin@user.ru',
+            'password' => Hash::make('admin'),
         ];
 
         if (!User::query()->where('email',$adminScheme['email'])->first()) {
@@ -35,15 +36,13 @@ class AdminSeeder extends Seeder
                 [
                     'attributes' => [
                         'id' => $admin->id,
-                        'phone' => "+" . random_int(1, 99) . random_int(0, 999) . random_int(0, 999) . random_int(0, 99) . random_int(0, 99),
+                        'phone' => $this->faker->phoneNumber,
                         'first_name' => $this->faker->firstName,
                         'last_name' => $this->faker->lastName
                     ]]
             );
 
             $request->call();
-            $response = $request->getResponse();
-            var_dump($response);
         }
     }
 }

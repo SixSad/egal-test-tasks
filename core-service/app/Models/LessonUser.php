@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $user_id {@property-type relation}
- * @property $lesson_id {@property-type relation} {@validation-rules required|integer}
+ * @property $user_id {@property-type field}
+ * @property $lesson_id {@property-type field} {@validation-rules required|integer}
  * @property $is_passed {@property-type field}{@validation-rules required|boolean}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
@@ -34,7 +34,6 @@ class LessonUser extends EgalModel
         'user_id',
         'lesson_id',
     ];
-
 
     protected $dispatchesEvents = [
         'updating' => UpdatingLessonUserEvent::class,

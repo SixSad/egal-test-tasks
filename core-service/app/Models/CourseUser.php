@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $user_id {@property-type relation} {@validation-rules required|uuid}
- * @property $course_id {@property-type relation} {@validation-rules required|integer|exists:App\Models\Course,id|unique_course_user}
+ * @property $user_id {@property-type relation} {@validation-rules required|uuid|exists:users,id}
+ * @property $course_id {@property-type relation} {@validation-rules required|integer|exists:courses,id|unique_course_user}
  * @property $percentage_passing {@property-type field}
  * @property $created_at {@property-type field}
  * @property $updated_at {@property-type field}
@@ -30,7 +30,6 @@ class CourseUser extends EgalModel
         'created_at',
         'updated_at'
     ];
-
 
     protected $dispatchesEvents = [
         'creating' => CourseUserCreatingEvent::class,

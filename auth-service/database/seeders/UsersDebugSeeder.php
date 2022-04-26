@@ -52,7 +52,7 @@ class UsersDebugSeeder extends Seeder
 
         $request->call();
         $response = $request->getResponse();
-        var_dump($response);
+
     }
 
 }

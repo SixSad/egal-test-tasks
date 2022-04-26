@@ -8,6 +8,8 @@ use App\Exceptions\WrongAttibuteException;
 use App\Exceptions\WrongLessonIdException;
 use App\Models\LessonUser;
 use Egal\Core\Session\Session;
+use Egal\Model\Exceptions\ValidateException;
+use Illuminate\Support\Facades\Validator;
 
 
 class CheckUpdatingFieldsListener
@@ -26,6 +28,17 @@ class CheckUpdatingFieldsListener
         $userUUID = Session::getUserServiceToken()->getUid();
         $wrongAttributes = array_diff_key($attributes, ['id' => '', 'is_passed' => '']);
         $isPassed = LessonUser::query()->find($model->id)->getAttribute('is_passed');
+
+        $validator = Validator::make($model->getAttributes(), [
+            'lesson_id' => 'end_course',
+        ]);
+
+        if ($validator->fails()) {
+            $exception = new ValidateException();
+            $exception->setMessageBag($validator->errors());
+
+            throw $exception;
+        }
 
         if ($isPassed === true) {
             throw new AlreadyPassedException();
