@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @action getMetadata {@statuses-access guest|logged}
  * @action getItem {@statuses-access guest|logged}
- * @action hi {@statuses-access guest|logged}
  * @action getItems {@statuses-access guest|logged} {@roles-access super_first_role|super_second_role}
  * @action create {@statuses-access guest|logged} {@roles-access super_first_role,super_second_role} {@services-access auth}
  * @action update {@statuses-access guest|logged} {@permissions-access super_first_permission|super_second_permission}

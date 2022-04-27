@@ -4,24 +4,12 @@ namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
 use App\Helpers\AuthValidator;
-use Egal\Core\Exceptions\ActionCallException;
 use Egal\Model\Exceptions\ValidateException;
 use Exception;
 use Illuminate\Support\Str;
 
-
 class CreateUserListener
 {
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Handle the event.
      *

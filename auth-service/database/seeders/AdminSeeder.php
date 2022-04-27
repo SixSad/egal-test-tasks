@@ -26,23 +26,26 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('admin'),
         ];
 
-        if (!User::query()->where('email',$adminScheme['email'])->first()) {
-            $admin = User::query()->create($adminScheme);
-            $admin->roles()->attach('admin');
-            $request = new \Egal\Core\Communication\Request(
-                'core',
-                'User',
-                'create',
-                [
-                    'attributes' => [
-                        'id' => $admin->id,
-                        'phone' => $this->faker->phoneNumber,
-                        'first_name' => $this->faker->firstName,
-                        'last_name' => $this->faker->lastName
-                    ]]
-            );
-
-            $request->call();
+        if (User::query()->where('email', $adminScheme['email'])->first()) {
+            return;
         }
+
+        $admin = User::query()->create($adminScheme);
+        $admin->roles()->attach('admin');
+
+        $request = new \Egal\Core\Communication\Request(
+            'core',
+            'User',
+            'create',
+            [
+                'attributes' => [
+                    'id' => $admin->id,
+                    'phone' => $this->faker->phoneNumber,
+                    'first_name' => $this->faker->firstName,
+                    'last_name' => $this->faker->lastName
+                ]]
+        );
+
+        $request->send();
     }
 }

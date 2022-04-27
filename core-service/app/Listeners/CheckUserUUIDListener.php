@@ -9,12 +9,6 @@ use App\Exceptions\UUIDException;
 
 class CheckUserUUIDListener
 {
-
-    public function __construct()
-    {
-
-    }
-
     /**
      * @throws UUIDException
      */

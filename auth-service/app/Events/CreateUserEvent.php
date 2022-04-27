@@ -32,5 +32,4 @@ class CreateUserEvent extends Event
     {
         return $this->attributes;
     }
-
 }

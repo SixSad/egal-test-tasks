@@ -3,46 +3,28 @@
 namespace App\Listeners;
 
 use App\Events\UpdatingLessonUserEvent;
-use App\Exceptions\AlreadyPassedException;
-use App\Exceptions\WrongAttibuteException;
-use App\Exceptions\WrongLessonIdException;
-use App\Models\LessonUser;
-use Egal\Core\Session\Session;
 use Egal\Model\Exceptions\ValidateException;
-use Illuminate\Support\Facades\Validator;
-
+use App\Helpers\CoreValidator;
+use App\Exceptions\{
+    AlreadyPassedException,
+    WrongAttibuteException,
+    WrongLessonIdException,
+};
 
 class CheckUpdatingFieldsListener
 {
-
     /**
      * @throws WrongLessonIdException
      * @throws AlreadyPassedException
-     * @throws WrongAttibuteException
+     * @throws WrongAttibuteException|ValidateException
      */
     public function handle(UpdatingLessonUserEvent $event): void
     {
         $model = $event->getModel();
+        $attributes = $event->getAttributes();
+        $userUUID = $event->getUuid();
 
-        $attributes = Session::getActionMessage()->getParameters()['attributes'];
-        $userUUID = Session::getUserServiceToken()->getUid();
         $wrongAttributes = array_diff_key($attributes, ['id' => '', 'is_passed' => '']);
-        $isPassed = LessonUser::query()->find($model->id)->getAttribute('is_passed');
-
-        $validator = Validator::make($model->getAttributes(), [
-            'lesson_id' => 'end_course',
-        ]);
-
-        if ($validator->fails()) {
-            $exception = new ValidateException();
-            $exception->setMessageBag($validator->errors());
-
-            throw $exception;
-        }
-
-        if ($isPassed === true) {
-            throw new AlreadyPassedException();
-        }
 
         if (!empty($wrongAttributes)) {
             throw new WrongAttibuteException();
@@ -51,6 +33,15 @@ class CheckUpdatingFieldsListener
         if ($event->getModel()->getAttribute('user_id') !== $userUUID) {
             throw new WrongLessonIdException();
         }
-    }
 
+        $isPassed = $model->getAttribute('is_passed');
+
+        if ($isPassed === true) {
+            throw new AlreadyPassedException();
+        }
+
+        CoreValidator::validate($model->getAttributes(), [
+            'lesson_id' => 'end_course',
+        ]);
+    }
 }

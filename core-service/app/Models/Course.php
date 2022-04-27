@@ -12,7 +12,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property $id {@property-type field} {@prymary-key}
- * @property $title {@property-type field} {@validation-rules required|unique:courses|regex:/(^([a-z,0-9]+)?$)/ui}
+ * @property $title {@property-type field} {@validation-rules required|string|unique:courses|regex:/(^([a-z,0-9]+)?$)/ui}
  * @property $student_capacity {@property-type field} {@validation-rules required|integer|between:0,99}
  * @property $start_date {@property-type field} {@validation-rules required|date|after_or_equal:date}
  * @property $end_date {@property-type field} {@validation-rules required|date|after:start_date}

@@ -26,23 +26,25 @@ class UserSeeder extends Seeder
             'password' => Hash::make('user')
         ];
 
-        if (!User::query()->where('email',$userScheme['email'])->first()) {
-            $user = User::query()->create($userScheme);
-
-            $request = new \Egal\Core\Communication\Request(
-                'core',
-                'User',
-                'create',
-                [
-                    'attributes' => [
-                        'id' => $user->id,
-                        'phone' => $this->faker->phoneNumber,
-                        'first_name' => $this->faker->firstName,
-                        'last_name' => $this->faker->lastName
-                    ]]
-            );
-
-            $request->call();
+        if (User::query()->where('email', $userScheme['email'])->first()) {
+            return;
         }
+
+        $user = User::query()->create($userScheme);
+
+        $request = new \Egal\Core\Communication\Request(
+            'core',
+            'User',
+            'create',
+            [
+                'attributes' => [
+                    'id' => $user->id,
+                    'phone' => $this->faker->phoneNumber,
+                    'first_name' => $this->faker->firstName,
+                    'last_name' => $this->faker->lastName
+                ]]
+        );
+
+        $request->send();
     }
 }
