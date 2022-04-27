@@ -68,5 +68,4 @@ services:
   adminer:
     image: adminer
     restart: always
-    ports:
-      - 63:8080
+

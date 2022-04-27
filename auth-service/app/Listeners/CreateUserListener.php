@@ -4,9 +4,9 @@ namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
 use App\Helpers\AuthValidator;
-use Egal\Core\Session\Session;
+use Egal\Core\Exceptions\ActionCallException;
 use Egal\Model\Exceptions\ValidateException;
-use Illuminate\Support\Facades\Validator;
+use Exception;
 use Illuminate\Support\Str;
 
 
@@ -31,17 +31,15 @@ class CreateUserListener
      */
     public function handle(CreateUserEvent $event): void
     {
-        $attributes = Session::getActionMessage()->getParameters()['attributes'];
+        $attributes = $event->getAttributes();
         $model = $event->getModel();
         $model->setAttribute('id', Str::uuid());
 
-        $validator = new AuthValidator($attributes, [
+        AuthValidator::validate($attributes, [
             'phone' => 'required|max:255',
             'first_name' => 'required|string',
             'last_name' => 'required|string'
         ]);
-
-        $validator->validate();
 
         $request = new \Egal\Core\Communication\Request(
             'core',
@@ -56,6 +54,13 @@ class CreateUserListener
                 ]]
         );
 
-        $request->send();
+        $request->call();
+        $response = $request->getResponse();
+
+        if ($response->getStatusCode() != 200) {
+            $actionErrorMessage = $response->getActionErrorMessage()->getMessage();
+            $actionErrorCode = $response->getActionErrorMessage()->getCode();
+            throw new Exception($actionErrorMessage, $actionErrorCode);
+        }
     }
 }

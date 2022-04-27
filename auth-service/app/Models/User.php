@@ -14,7 +14,6 @@ use Egal\AuthServiceDependencies\Models\User as BaseUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
@@ -52,10 +51,6 @@ class User extends BaseUser
     ];
     protected $hidden = [
         'password',
-    ];
-    protected $guarder = [
-        'created_at',
-        'updated_at',
     ];
     protected $dispatchesEvents = [
         'creating' => CreateUserEvent::class,

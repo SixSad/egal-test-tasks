@@ -3,33 +3,21 @@ version: "3.6"
 services:
 
   rabbitmq:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: rabbitmq
     ports:
       - ${RABBITMQ_PORT:-5672}:5672
       - ${RABBITMQ_MANAGER_PORT:-15672}:15672
 
   web-service:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: web-service
     ports:
       - ${WEB_SERVICE_PORT:-81}:8080
     depends_on:
       - rabbitmq
 
   database:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: database
     ports:
       - ${RABBITMQ_PORT:-5432}:5432
 
   auth-service:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: auth-service
     build:
       context: auth-service
     volumes:
@@ -40,9 +28,6 @@ services:
       - core-service
 
   core-service:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: core-service
     build:
       context: core-service
     volumes:
@@ -52,6 +37,5 @@ services:
       - database
 
   adminer:
-    extends:
-      file: ./deploy/docker-compose.yml
-      service: adminer
+    ports:
+      - ${ADMINER_PORT:-63}:8080

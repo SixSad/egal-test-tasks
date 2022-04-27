@@ -7,18 +7,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthValidator
 {
-    public array $attributes;
-    public array $rules;
 
-    public function __construct(array $attributes, array $rules)
+    public static function validate(array $attributes, array $rules): void
     {
-        $this->attributes = $attributes;
-        $this->rules = $rules;
-    }
-
-    public function validate(): void
-    {
-        $validator = Validator::make($this->attributes, $this->rules);
+        $validator = Validator::make($attributes, $rules);
 
         if ($validator->fails()) {
             $exception = new ValidateException();
