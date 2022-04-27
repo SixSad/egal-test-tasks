@@ -44,7 +44,6 @@ class Course extends EgalModel
         'updated_at'
     ];
 
-
     public function courseUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'course_users','course_id','user_id');

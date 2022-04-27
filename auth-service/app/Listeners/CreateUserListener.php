@@ -32,6 +32,9 @@ class CreateUserListener
     {
         $attributes = Session::getActionMessage()->getParameters()['attributes'];
 
+        $model = $event->getModel();
+        $model->setAttribute('id', Str::uuid());
+
         $validator = Validator::make($attributes, [
             'phone' => 'required|max:255',
             'first_name' => 'required|string',

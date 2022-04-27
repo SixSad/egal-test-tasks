@@ -23,8 +23,6 @@ class CheckUserUUIDListener
         $model = $event->getModel();
 
         if ($model->getAttribute('user_id') !== Session::getUserServiceToken()->getUid()) {
-            var_dump($model->getAttribute('user_id'));
-            var_dump(Session::getUserServiceToken()->getUid());
             throw new UUIDException();
         }
     }

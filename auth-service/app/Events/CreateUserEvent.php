@@ -20,4 +20,9 @@ class CreateUserEvent extends Event
         $this->user = $user;
     }
 
+    public function getModel(): User
+    {
+        return $this->user;
+    }
+
 }

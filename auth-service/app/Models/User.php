@@ -61,9 +61,9 @@ class User extends BaseUser
         'updated_at',
     ];
 
-//    protected $dispatchesEvents = [
-//        'creating' => CreateUserEvent::class,
-//    ];
+    protected $dispatchesEvents = [
+        'creating' => CreateUserEvent::class,
+    ];
 
     public static function actionRegister(array $attributes = []): User
     {
@@ -72,7 +72,6 @@ class User extends BaseUser
         }
 
         $user = new static();
-        $user->setAttribute('id', Str::uuid());
         $user->setAttribute('email', $attributes['email']);
         $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
 
