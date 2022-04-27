@@ -25,11 +25,6 @@ class LessonUser extends EgalModel
         'is_passed',
     ];
 
-    protected $guarder = [
-        'created_at',
-        'updated_at'
-    ];
-
     protected $hidden = [
         'user_id',
         'lesson_id',

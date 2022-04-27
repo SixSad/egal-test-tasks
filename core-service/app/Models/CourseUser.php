@@ -26,11 +26,6 @@ class CourseUser extends EgalModel
         'percentage_passing',
     ];
 
-    protected $guarder = [
-        'created_at',
-        'updated_at'
-    ];
-
     protected $dispatchesEvents = [
         'creating' => CourseUserCreatingEvent::class,
         'created' => CourseUserCreatedEvent::class

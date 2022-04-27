@@ -36,11 +36,6 @@ class User extends EgalModel
         'first_name',
     ];
 
-    protected $guarder = [
-        'created_at',
-        'updated_at'
-    ];
-
     public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class, 'course_users', 'user_id', 'course_id');

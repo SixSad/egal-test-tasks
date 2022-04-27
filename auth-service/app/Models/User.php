@@ -44,23 +44,19 @@ class User extends BaseUser
 
     protected $primaryKey = 'id';
     public $incrementing = false;
-
     protected $fillable = [
         'id',
         'phone',
         'last_name',
         'first_name'
     ];
-
     protected $hidden = [
         'password',
     ];
-
     protected $guarder = [
         'created_at',
         'updated_at',
     ];
-
     protected $dispatchesEvents = [
         'creating' => CreateUserEvent::class,
     ];

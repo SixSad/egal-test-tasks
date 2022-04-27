@@ -3,10 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
-use Egal\Core\Listeners\EventListener;
+use App\Helpers\AuthValidator;
 use Egal\Core\Session\Session;
 use Egal\Model\Exceptions\ValidateException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 
 class CreateUserListener
@@ -31,22 +32,16 @@ class CreateUserListener
     public function handle(CreateUserEvent $event): void
     {
         $attributes = Session::getActionMessage()->getParameters()['attributes'];
-
         $model = $event->getModel();
         $model->setAttribute('id', Str::uuid());
 
-        $validator = Validator::make($attributes, [
+        $validator = new AuthValidator($attributes, [
             'phone' => 'required|max:255',
             'first_name' => 'required|string',
             'last_name' => 'required|string'
         ]);
 
-        if ($validator->fails()) {
-            $exception = new ValidateException();
-            $exception->setMessageBag($validator->errors());
-
-            throw $exception;
-        }
+        $validator->validate();
 
         $request = new \Egal\Core\Communication\Request(
             'core',
