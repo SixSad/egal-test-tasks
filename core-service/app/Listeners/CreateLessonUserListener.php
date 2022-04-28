@@ -2,19 +2,19 @@
 
 namespace App\Listeners;
 
-use App\Events\CourseUserCreatedEvent;
+use App\Helpers\AbstractEvent;
+use App\Helpers\AbstractListener;
 use App\Models\Lesson;
 use App\Models\LessonUser;
 
-
-class CreateLessonUserListener
+class CreateLessonUserListener extends AbstractListener
 {
-
-    public function handle(CourseUserCreatedEvent $event): void
+    public function handle(AbstractEvent $event): void
     {
+        parent::handle($event);
         $model = $event->getModel();
         $attributes = $model->getAttributes();
-        $lessons = Lesson::query()->where('course_id',$attributes['course_id'])->get();
+        $lessons = Lesson::query()->where('course_id', $attributes['course_id'])->get();
 
         foreach ($lessons as $lesson) {
             LessonUser::query()->create([

@@ -2,7 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\UpdatingLessonUserEvent;
+use App\Helpers\AbstractEvent;
+use App\Helpers\AbstractListener;
+use App\Models\LessonUser;
 use Egal\Model\Exceptions\ValidateException;
 use App\Helpers\CoreValidator;
 use App\Exceptions\{
@@ -11,15 +13,16 @@ use App\Exceptions\{
     WrongLessonIdException,
 };
 
-class CheckUpdatingFieldsListener
+class CheckUpdatingFieldsListener extends AbstractListener
 {
     /**
      * @throws WrongLessonIdException
      * @throws AlreadyPassedException
      * @throws WrongAttibuteException|ValidateException
      */
-    public function handle(UpdatingLessonUserEvent $event): void
+    public function handle(AbstractEvent $event): void
     {
+        parent::handle($event);
         $model = $event->getModel();
         $attributes = $event->getAttributes();
         $userUUID = $event->getUuid();
@@ -34,8 +37,10 @@ class CheckUpdatingFieldsListener
             throw new WrongLessonIdException();
         }
 
-        $isPassed = $model->getAttribute('is_passed');
+        $isPassed = LessonUser::query()->find($model->getAttribute('id'))->getAttribute('is_passed');
 
+        var_dump($model);
+        var_dump($isPassed);
         if ($isPassed === true) {
             throw new AlreadyPassedException();
         }

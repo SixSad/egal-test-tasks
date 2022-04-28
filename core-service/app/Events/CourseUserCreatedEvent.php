@@ -2,21 +2,15 @@
 
 namespace App\Events;
 
+use App\Helpers\AbstractEvent;
 use App\Models\CourseUser;
-use Egal\Core\Events\Event;
-use Illuminate\Queue\SerializesModels;
 
-class CourseUserCreatedEvent extends Event
+class CourseUserCreatedEvent extends AbstractEvent
 {
     public CourseUser $courseUser;
 
     public function __construct(CourseUser $courseUser)
     {
-        $this->courseUser = $courseUser;
-    }
-
-    public function getModel(): CourseUser
-    {
-        return $this->courseUser;
+        parent::__construct($courseUser);
     }
 }

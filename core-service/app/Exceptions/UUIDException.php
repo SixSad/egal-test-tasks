@@ -7,7 +7,7 @@ use Exception;
 class UUIDException extends Exception
 {
 
-    protected $message = 'Wrong Id';
+    protected $message = 'Invalid user_id';
 
     protected $code = 400;
 }
