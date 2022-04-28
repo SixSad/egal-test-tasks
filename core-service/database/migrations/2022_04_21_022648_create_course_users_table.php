@@ -17,7 +17,7 @@ class CreateCourseUsersTable extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('course_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('percentage_passing')->nullable(false)->default(0);
+            $table->UnsignedInteger('percentage_passing')->nullable(false)->default(0);
             $table->timestamps();
         });
     }

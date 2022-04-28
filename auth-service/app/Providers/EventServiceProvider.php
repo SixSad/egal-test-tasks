@@ -9,20 +9,6 @@ use Egal\Core\Events\UserServiceTokenDetectedEvent;
 
 class EventServiceProvider extends ServiceProvider
 {
-
-    /**
-     * Определение обработчиков глобальных событий
-     */
-    public array $globalListen = [
-        'service' => [
-            'Model' => [
-                'event-message' => [
-                    ExampleListener::class
-                ]
-            ]
-        ]
-    ];
-
     /**
      * Определение обработчиков локальных событий
      */

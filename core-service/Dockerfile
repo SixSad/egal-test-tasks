@@ -24,6 +24,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 
 CMD /wait && composer install --no-interaction --no-progress --no-autoloader --no-cache \
-    && composer dump-autoload && php artisan migrate --force  && php artisan egal:run
-
+    && composer dump-autoload && php artisan migrate --force && php artisan cache:clear \
+    && php artisan egal:run
 
