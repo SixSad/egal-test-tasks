@@ -2,14 +2,14 @@
 
 namespace App\Listeners;
 
-use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\Lesson;
 use App\Models\LessonUser;
 
 class CreateLessonUserListener extends AbstractListener
 {
-    public function handle(AbstractEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
         parent::handle($event);
         $model = $event->getModel();

@@ -3,15 +3,15 @@
 namespace App\Listeners;
 
 use App\Exceptions\UUIDException;
-use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
+use App\Helpers\AbstractServiceEvent;
 
 class CheckUserUUIDListener extends AbstractListener
 {
     /**
      * @throws UUIDException
      */
-    public function handle(AbstractEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
         parent::handle($event);
         $model = $event->getModel();

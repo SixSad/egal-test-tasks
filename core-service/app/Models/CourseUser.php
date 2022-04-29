@@ -29,5 +29,4 @@ class CourseUser extends EgalModel
         'creating' => CourseUserCreatingEvent::class,
         'created' => CourseUserCreatedEvent::class
     ];
-
 }

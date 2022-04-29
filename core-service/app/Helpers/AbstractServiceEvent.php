@@ -8,7 +8,7 @@ use Egal\Model\Model;
 use Illuminate\Support\Facades\Log;
 
 
-abstract class AbstractEvent extends Event
+abstract class AbstractServiceEvent extends Event
 {
     private Model $model;
     private string $uuid;

@@ -2,7 +2,9 @@
 
 namespace App\DebugModels;
 
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
 /**
@@ -24,6 +26,12 @@ use Illuminate\Support\Collection;
  * @action refreshUserMasterToken       {@statuses-access guest}
  * @action getItems {@statuses-access guest} {@roles-access super_first_role|super_second_role}
  */
-class UserDebug extends User{
+class UserDebug extends User
+{
+    protected $table = 'users';
 
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'user_roles', 'user_id', 'id');
+    }
 }

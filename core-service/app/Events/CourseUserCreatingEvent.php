@@ -2,13 +2,11 @@
 
 namespace App\Events;
 
-use App\Helpers\AbstractEvent;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\CourseUser;
 
-class CourseUserCreatingEvent extends AbstractEvent
+class CourseUserCreatingEvent extends AbstractServiceEvent
 {
-    public CourseUser $courseUser;
-
     public function __construct(CourseUser $courseUser)
     {
         parent::__construct($courseUser);

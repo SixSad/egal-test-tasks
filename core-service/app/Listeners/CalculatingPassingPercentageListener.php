@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\UpdatedLessonUserEvent;
-use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\CourseUser;
 use App\Models\Lesson;
 use App\Models\LessonUser;
@@ -17,7 +17,7 @@ class CalculatingPassingPercentageListener extends AbstractListener
      * @return void
      * @throws NotFoundException
      */
-    public function handle(AbstractEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
         parent::handle($event);
         $model = $event->getModel();

@@ -2,11 +2,11 @@
 
 namespace App\Events;
 
-use App\Helpers\AbstractEvent;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\LessonUser;
 use Egal\Core\Session\Session;
 
-class UpdatingLessonUserEvent extends AbstractEvent
+class UpdatingLessonUserEvent extends AbstractServiceEvent
 {
     public array $attributes;
 

@@ -52,9 +52,9 @@ class User extends BaseUser
     protected $hidden = [
         'password',
     ];
-//    protected $dispatchesEvents = [
-//        'creating' => CreateUserEvent::class,
-//    ];
+    protected $dispatchesEvents = [
+        'creating' => CreateUserEvent::class,
+    ];
 
     public static function actionRegister(array $attributes = []): User
     {

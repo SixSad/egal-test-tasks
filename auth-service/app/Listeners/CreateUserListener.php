@@ -3,12 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\CreateUserEvent as CreateUserEvent;
+use App\Helpers\AbstractEvent;
+use App\Helpers\AbstractListener;
 use App\Helpers\AuthValidator;
 use Egal\Model\Exceptions\ValidateException;
 use Exception;
 use Illuminate\Support\Str;
 
-class CreateUserListener
+class CreateUserListener extends AbstractListener
 {
     /**
      * Handle the event.
@@ -17,8 +19,9 @@ class CreateUserListener
      * @return void
      * @throws ValidateException
      */
-    public function handle(CreateUserEvent $event): void
+    public function handle(AbstractEvent $event): void
     {
+        parent::handle($event);
         $attributes = $event->getAttributes();
         $model = $event->getModel();
         $model->setAttribute('id', Str::uuid());
@@ -35,7 +38,7 @@ class CreateUserListener
             'create',
             [
                 'attributes' => [
-                    'id' => $event->user->id,
+                    'id' => $model->id,
                     'phone' => $attributes['phone'],
                     'first_name' => $attributes['first_name'],
                     'last_name' => $attributes['last_name']

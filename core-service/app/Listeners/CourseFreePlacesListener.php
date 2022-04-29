@@ -4,8 +4,8 @@ namespace App\Listeners;
 
 use App\Events\CourseUserCreatingEvent;
 use App\Exceptions\FreePlaceException;
-use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\Course;
 use Egal\Model\Exceptions\NotFoundException;
 
@@ -17,7 +17,7 @@ class CourseFreePlacesListener extends AbstractListener
      * @throws FreePlaceException
      * @throws NotFoundException
      */
-    public function handle(AbstractEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
         parent::handle($event);
         $model = $event->getModel();

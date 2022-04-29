@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
+use App\Helpers\AbstractServiceEvent;
 use App\Models\LessonUser;
 use Egal\Model\Exceptions\ValidateException;
 use App\Helpers\CoreValidator;
@@ -20,7 +20,7 @@ class CheckUpdatingFieldsListener extends AbstractListener
      * @throws AlreadyPassedException
      * @throws WrongAttibuteException|ValidateException
      */
-    public function handle(AbstractEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
         parent::handle($event);
         $model = $event->getModel();
