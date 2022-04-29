@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\DebugModels;
 
+use App\Models\Course;
 use Carbon\Carbon;
 
 /**

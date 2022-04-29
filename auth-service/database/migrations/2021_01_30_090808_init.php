@@ -13,6 +13,7 @@ class Init extends Migration
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('password');
+            $table->jsonb('in_session')->nullable(true);
             $table->timestamps();
         });
 

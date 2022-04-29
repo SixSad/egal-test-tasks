@@ -4,15 +4,18 @@ namespace App\Models;
 
 use App\Events\CreateUserEvent;
 use App\Exceptions\EmptyPasswordException;
-use App\Exceptions\PasswordHashException;
+use Carbon\Carbon;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
 use Egal\Auth\Tokens\UserMasterToken;
-use Egal\Auth\Tokens\UserServiceToken;
-use Egal\AuthServiceDependencies\Exceptions\LoginException;
-use Egal\AuthServiceDependencies\Exceptions\UserNotIdentifiedException;
-use Egal\AuthServiceDependencies\Models\User as BaseUser;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Egal\AuthServiceDependencies\{
+    Exceptions\LoginException,
+    Models\User as BaseUser
+};
+use Illuminate\Database\Eloquent\{
+    Casts\Attribute,
+    Factories\HasFactory,
+    Relations\BelongsToMany
+};
 use Illuminate\Support\Collection;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
@@ -22,8 +25,9 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  * @property $email         {@property-type field}  {@validation-rules required|string|email|unique:users,email}
  * @property $password      {@property-type field}  {@validation-rules required|string}
  * @property $phone         {@property-type fake-field}
- * @property $first_name         {@property-type fake-field}
- * @property $last_name         {@property-type fake-field}
+ * @property $first_name    {@property-type fake-field}
+ * @property $last_name     {@property-type fake-field}
+ * @property $in_session    {@property-type field}
  * @property $created_at    {@property-type field}
  * @property $updated_at    {@property-type field}
  *
@@ -49,12 +53,27 @@ class User extends BaseUser
         'last_name',
         'first_name'
     ];
+
     protected $hidden = [
         'password',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+        'in_session' => 'array',
+    ];
+
     protected $dispatchesEvents = [
         'creating' => CreateUserEvent::class,
     ];
+
+    protected function password(): Attribute
+    {
+        return new Attribute(
+            set: fn($value) => password_hash($value, PASSWORD_BCRYPT),
+        );
+    }
 
     public static function actionRegister(array $attributes = []): User
     {
@@ -64,13 +83,7 @@ class User extends BaseUser
 
         $user = new static();
         $user->setAttribute('email', $attributes['email']);
-        $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
-
-        if (!$hashedPassword) {
-            throw new PasswordHashException();
-        }
-
-        $user->setAttribute('password', $hashedPassword);
+        $user->setAttribute('password', $attributes['password']);
         $user->save();
 
         return $user;
@@ -94,6 +107,8 @@ class User extends BaseUser
         $umrt = new UserMasterRefreshToken();
         $umrt->setSigningKey(config('app.service_key'));
         $umrt->setAuthIdentification($user->getAuthIdentifier());
+        $user->setAttribute('in_session', Carbon::now()->toDateTimeString());
+        $user->save();
 
         return [
             'user_master_token' => $umt->generateJWT(),

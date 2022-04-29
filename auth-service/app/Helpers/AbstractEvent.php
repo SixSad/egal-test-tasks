@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 abstract class AbstractEvent extends Event
 {
     private Model $model;
-    private string $uuid;
 
     public function __construct(Model $model)
     {
