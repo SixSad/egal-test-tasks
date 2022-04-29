@@ -9,15 +9,25 @@ use Illuminate\Support\ServiceProvider;
 class DebugModelServiceProvider extends ServiceProvider
 {
     public string $class;
-    public bool $include;
+    public bool $debugMode;
     public string $dir;
 
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->dir = env('DEBUG_MODELS_ROOT');
-        $this->include = env('DEBUG_MODELS_INCLUDE', false);
+        $this->setDir();
+        $this->setDebugModel();
         $this->scanModels($this->dir);
+    }
+
+    protected function setDir()
+    {
+        $this->dir = env('DEBUG_MODELS_ROOT');
+    }
+
+    protected function setDebugModel()
+    {
+        $this->debugMode = env('DEBUG_MODELS_INCLUDE', false);
     }
 
     protected function scanModels(?string $dir = null): void
@@ -61,7 +71,7 @@ class DebugModelServiceProvider extends ServiceProvider
     public
     function register(): void
     {
-        if ($this->include) {
+        if ($this->debugMode) {
             ModelManager::loadModel($this->class);
             $this->commands([]);
         }
