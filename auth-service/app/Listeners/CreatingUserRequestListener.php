@@ -16,7 +16,7 @@ class CreatingUserRequestListener extends AbstractListener
      *
      * @param CreateUserEvent $event
      * @return void
-     * @throws ValidateException
+     * @throws ValidateException|Exception
      */
     public function handle(AbstractEvent $event): void
     {

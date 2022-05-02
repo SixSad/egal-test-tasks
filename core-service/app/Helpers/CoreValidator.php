@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Validator;
 
 class CoreValidator
 {
-
+    /**
+     * @throws ValidateException
+     */
     public static function validate(array $attributes, array $rules): void
     {
         $validator = Validator::make($attributes, $rules);

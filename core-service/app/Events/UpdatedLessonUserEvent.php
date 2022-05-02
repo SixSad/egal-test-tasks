@@ -11,5 +11,4 @@ class UpdatedLessonUserEvent extends AbstractServiceEvent
     {
         parent::__construct($lessonUser);
     }
-
 }
