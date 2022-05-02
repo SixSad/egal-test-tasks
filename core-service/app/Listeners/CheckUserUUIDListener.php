@@ -15,9 +15,8 @@ class CheckUserUUIDListener extends AbstractListener
     {
         parent::handle($event);
         $model = $event->getModel();
-        $uuid = $event->getUuid();
 
-        if ($model->getAttribute('user_id') !== $uuid) {
+        if ($model->getAttribute('user_id') !== $event->getUuid()) {
             throw new UUIDException();
         }
     }

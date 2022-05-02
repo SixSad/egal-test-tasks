@@ -21,10 +21,12 @@ class CourseFreePlacesListener extends AbstractListener
     {
         parent::handle($event);
         $model = $event->getModel();
-        $course = Course::query()->find($model->getAttribute('course_id'));
+        $course = Course::query()->findOrFail($model->getAttribute('course_id'));
+
         if (!$course) {
             throw new NotFoundException();
         }
+
         if ($course->getAttribute('student_capacity') < 1) {
             throw new FreePlaceException();
         }

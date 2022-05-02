@@ -13,7 +13,7 @@ class RefreshFreePlacesListener extends AbstractListener
         parent::handle($event);
         $model = $event->getModel();
         /** @var Course $course */
-        $course = Course::query()->find($model->getAttribute('course_id'));
+        $course = Course::query()->findOrFail($model->getAttribute('course_id'));
         $course->update([
             'student_capacity' => $course->student_capacity - 1,
         ]);

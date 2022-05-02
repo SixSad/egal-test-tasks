@@ -72,8 +72,7 @@ class DebugModelServiceProvider extends ServiceProvider
      * @return void
      * @throws LoadModelImpossiblyException
      */
-    public
-    function register(): void
+    public function register(): void
     {
         if ($this->debugMode) {
             ModelManager::loadModel($this->class);

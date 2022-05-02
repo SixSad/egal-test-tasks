@@ -21,12 +21,7 @@ class CalculatingPassingPercentageListener extends AbstractListener
     {
         parent::handle($event);
         $model = $event->getModel();
-        $course = Lesson::query()->find($model->getAttribute('lesson_id'))?->course;
-
-        if (!$course) {
-            throw new NotFoundException();
-        }
-
+        $course = Lesson::query()->findOrFail($model->getAttribute('lesson_id'))->course;
         $countLessons = $course->lessons->count();
 
         $courseUser = CourseUser::query()->where([

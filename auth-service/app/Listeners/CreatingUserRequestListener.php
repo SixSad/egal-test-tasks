@@ -5,12 +5,11 @@ namespace App\Listeners;
 use App\Events\CreateUserEvent as CreateUserEvent;
 use App\Helpers\AbstractEvent;
 use App\Helpers\AbstractListener;
-use App\Helpers\AuthValidator;
 use Egal\Model\Exceptions\ValidateException;
 use Exception;
 use Illuminate\Support\Str;
 
-class CreateUserListener extends AbstractListener
+class CreatingUserRequestListener extends AbstractListener
 {
     /**
      * Handle the event.
@@ -25,12 +24,6 @@ class CreateUserListener extends AbstractListener
         $attributes = $event->getAttributes();
         $model = $event->getModel();
         $model->setAttribute('id', Str::uuid());
-
-        AuthValidator::validate($attributes, [
-            'phone' => 'required|max:255',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string'
-        ]);
 
         $request = new \Egal\Core\Communication\Request(
             'core',

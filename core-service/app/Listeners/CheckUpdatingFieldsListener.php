@@ -39,8 +39,6 @@ class CheckUpdatingFieldsListener extends AbstractListener
 
         $isPassed = LessonUser::query()->find($model->getAttribute('id'))->getAttribute('is_passed');
 
-        var_dump($model);
-        var_dump($isPassed);
         if ($isPassed === true) {
             throw new AlreadyPassedException();
         }

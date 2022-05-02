@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use App\Events\CreateUserEvent;
-use App\Exceptions\EmptyPasswordException;
+use App\Helpers\AuthValidator;
 use Carbon\Carbon;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
 use Egal\Auth\Tokens\UserMasterToken;
 use Egal\AuthServiceDependencies\{
-    Exceptions\LoginException,
     Models\User as BaseUser
 };
 use Illuminate\Database\Eloquent\{
@@ -22,8 +21,8 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property $id            {@property-type field}  {@primary-key}
- * @property $email         {@property-type field}  {@validation-rules required|string|email|unique:users,email}
- * @property $password      {@property-type field}  {@validation-rules required|string}
+ * @property $email         {@property-type field}
+ * @property $password      {@property-type field}
  * @property $phone         {@property-type fake-field}
  * @property $first_name    {@property-type fake-field}
  * @property $last_name     {@property-type fake-field}
@@ -59,8 +58,6 @@ class User extends BaseUser
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d',
-        'updated_at' => 'datetime:Y-m-d',
         'in_session' => 'array',
     ];
 
@@ -75,30 +72,39 @@ class User extends BaseUser
         );
     }
 
-    public static function actionRegister(array $attributes = []): User
+    protected function createdAt(): Attribute
     {
-        if (!$attributes['password']) {
-            throw new EmptyPasswordException();
-        }
+        return new Attribute(
+            get: fn($value) => date('Y-m-d', strtotime($value)),
+        );
+    }
 
+    protected function updatedAt(): Attribute
+    {
+        return new Attribute(
+            get: fn($value) => date('Y-m-d', strtotime($value)),
+        );
+    }
+
+    public static function actionRegister(): User
+    {
         $user = new static();
-        $user->setAttribute('email', $attributes['email']);
-        $user->setAttribute('password', $attributes['password']);
         $user->save();
-
         return $user;
     }
 
-    public static function actionLogin(string $email, string $password): array
+    public static function actionLogin(array $attributes): array
     {
         /** @var BaseUser $user */
-        $user = self::query()
-            ->where('email', '=', $email)
-            ->first();
 
-        if (!$user || !password_verify($password, $user->getAttribute('password'))) {
-            throw new LoginException('Incorrect Email or password!');
-        }
+        AuthValidator::validate($attributes, [
+            'email' => 'check_email',
+            'password' => 'check_password'
+        ]);
+
+        $user = self::query()
+            ->where('email', '=', $attributes['email'])
+            ->first();
 
         $umt = new UserMasterToken();
         $umt->setSigningKey(config('app.service_key'));

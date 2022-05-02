@@ -7,7 +7,6 @@ use Egal\Core\Session\Session;
 use Egal\Model\Model;
 use Illuminate\Support\Facades\Log;
 
-
 abstract class AbstractServiceEvent extends Event
 {
     private Model $model;
