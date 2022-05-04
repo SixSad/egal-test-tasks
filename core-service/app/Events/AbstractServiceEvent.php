@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Events;
 
 use Egal\Core\Events\Event;
 use Egal\Core\Session\Session;
@@ -14,20 +14,18 @@ abstract class AbstractServiceEvent extends Event
 
     public function __construct(Model $model)
     {
-        Log::info(
-            'Event ' . get_class($this)
-            . ' was fired with model: '
-            . get_class($model)
-            . '(Changes: ' . $model->wasChanged()
-            . ', Dirty: ' . $model->isDirty()
-            . ") \nSerialized model: "
-            , [$model->toArray()]
-        );
         $this->setModel($model);
         $this->setUuid();
+
+        Log::info(sprintf("Event [%s] was fired with model [%s]. (%s). %s",
+            get_class($this),
+            get_class($model),
+            $model->wasChanged() ? "Changes: true" : ($model->isDirty() ? "Dirty: true" : "Dirty: false"),
+            $model->getAttributes() ? "Serialized model: $model" : "",
+        ));
     }
 
-    public function setModel(Model $model)
+    public function setModel(Model $model): void
     {
         $this->model = $model;
     }

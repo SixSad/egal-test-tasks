@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Events\AbstractEvent;
 use App\Exceptions\EmptyPasswordException;
-use App\Helpers\AbstractEvent;
-use App\Helpers\AbstractListener;
 use App\Helpers\AuthValidator;
 
 class ValidateAttributesListener extends AbstractListener
@@ -15,13 +14,6 @@ class ValidateAttributesListener extends AbstractListener
         $attributes = $event->getAttributes();
         $model = $event->getModel();
 
-        if (!$attributes['password']) {
-            throw new EmptyPasswordException();
-        }
-
-        $model->setAttribute('email', $attributes['email']);
-        $model->setAttribute('password', $attributes['password']);
-
         AuthValidator::validate($attributes, [
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:5|max:60',
@@ -29,5 +21,9 @@ class ValidateAttributesListener extends AbstractListener
             'first_name' => 'required|string',
             'last_name' => 'required|string'
         ]);
+
+        $model->setAttribute('email', $attributes['email']);
+        $model->setAttribute('password', $attributes['password']);
+
     }
 }

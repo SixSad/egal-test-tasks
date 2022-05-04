@@ -3,8 +3,7 @@
 namespace App\Listeners;
 
 use App\Exceptions\UUIDException;
-use App\Helpers\AbstractListener;
-use App\Helpers\AbstractServiceEvent;
+use App\Events\AbstractServiceEvent;
 
 class CheckUserUUIDListener extends AbstractListener
 {

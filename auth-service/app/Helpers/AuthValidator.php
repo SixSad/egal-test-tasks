@@ -20,4 +20,16 @@ class AuthValidator
         }
     }
 
+    public static function validateFirstFail(array $attributes, array $rules): void
+    {
+        $validator = Validator::make($attributes, $rules)->stopOnFirstFailure();
+
+        if ($validator->fails()) {
+            $exception = new ValidateException();
+            $exception->setMessageBag($validator->errors());
+
+            throw $exception;
+        }
+    }
+
 }

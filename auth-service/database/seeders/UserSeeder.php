@@ -30,7 +30,14 @@ class UserSeeder extends Seeder
             return;
         }
 
+//        $user = User::withoutEvents(function () use ($userScheme) {
+//            $dispatcher User::unsetEventDispatcher();
+//            return User::query()->create($userScheme);
+//        });
+        $dispatcher = User::getEventDispatcher();
+        User::unsetEventDispatcher();
         $user = User::query()->create($userScheme);
+        User::setEventDispatcher($dispatcher);
 
         $request = new \Egal\Core\Communication\Request(
             'core',

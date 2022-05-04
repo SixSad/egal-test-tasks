@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Helpers\AbstractServiceEvent;
 use App\Models\CourseUser;
 
 class CourseUserCreatedEvent extends AbstractServiceEvent

@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Events\AbstractServiceEvent;
 use App\Events\UpdatedLessonUserEvent;
-use App\Helpers\AbstractListener;
-use App\Helpers\AbstractServiceEvent;
 use App\Models\CourseUser;
 use App\Models\Lesson;
 use App\Models\LessonUser;

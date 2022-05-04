@@ -11,15 +11,19 @@ class CheckPasswordRule extends EgalRule
 
     public function validate($attribute, $value, $parameters = null): bool
     {
-        $attributes = Session::getActionMessage()->getParameters()['attributes'];
+        $attributes = Session::getActionMessage()->getParameters();
         $user = User::query()->where('email', $attributes['email'])->first();
 
+        if (!$user) {
+            return false;
+        }
         return password_verify($value, $user->getAttribute('password'));
+
     }
 
     public function message(): string
     {
-        return ('Incorrect Email or password!');
+        return ('Incorrect password!');
     }
 
 }

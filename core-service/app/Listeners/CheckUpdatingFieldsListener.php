@@ -2,8 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Helpers\AbstractListener;
-use App\Helpers\AbstractServiceEvent;
+use App\Events\AbstractServiceEvent;
 use App\Models\LessonUser;
 use Egal\Model\Exceptions\ValidateException;
 use App\Helpers\CoreValidator;

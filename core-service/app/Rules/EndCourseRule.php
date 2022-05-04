@@ -12,8 +12,8 @@ class EndCourseRule extends EgalRule
 
     public function validate($attribute, $value, $parameters = null): bool
     {
-        $lesson = Lesson::query()->find($value);
-        $course = Course::query()?->find($lesson['course_id']);
+        $lesson = Lesson::query()->findOrFail($value);
+        $course = Course::query()->findOrFail($lesson['course_id']);
         return Carbon::parse($course['end_date'])->getTimestamp() > Carbon::now()->getTimestamp();
     }
 

@@ -2,11 +2,10 @@
 
 namespace App\Events;
 
-use App\Helpers\AbstractEvent;
 use App\Models\User;
 use Egal\Core\Session\Session;
 
-class  CreateUserEvent extends AbstractEvent
+class CreateUserEvent extends AbstractEvent
 {
     public array $attributes;
 

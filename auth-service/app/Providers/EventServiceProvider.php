@@ -7,7 +7,7 @@ use App\Listeners\CreatingUserRequestListener;
 use App\Listeners\ValidateAttributesListener;
 use Egal\Core\Events\EventServiceProvider as ServiceProvider;
 
-class   EventServiceProvider extends ServiceProvider
+class EventServiceProvider extends ServiceProvider
 {
     /**
      * Определение обработчиков локальных событий
@@ -16,6 +16,6 @@ class   EventServiceProvider extends ServiceProvider
         CreateUserEvent::class => [
             ValidateAttributesListener::class,
             CreatingUserRequestListener::class
-        ],
+        ]
     ];
 }

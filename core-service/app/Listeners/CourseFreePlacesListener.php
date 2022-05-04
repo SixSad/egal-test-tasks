@@ -4,8 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CourseUserCreatingEvent;
 use App\Exceptions\FreePlaceException;
-use App\Helpers\AbstractListener;
-use App\Helpers\AbstractServiceEvent;
+use App\Events\AbstractServiceEvent;
 use App\Models\Course;
 use Egal\Model\Exceptions\NotFoundException;
 

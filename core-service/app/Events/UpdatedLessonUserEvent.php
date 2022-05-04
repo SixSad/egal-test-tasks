@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Helpers\AbstractServiceEvent;
 use App\Models\LessonUser;
 
 class UpdatedLessonUserEvent extends AbstractServiceEvent

@@ -64,6 +64,7 @@ class DebugModelServiceProvider extends ServiceProvider
             $class = str_replace($dir, '', $itemPath);
             $class = str_replace($dirItem, $classShortName, $class);
             $class = str_replace('/', '\\', $class);
+
             $this->class = $modelsNamespace . $class;
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\CreateUserEvent;
+use App\Events\LoginValidateEvent;
 use App\Helpers\AuthValidator;
 use Carbon\Carbon;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
@@ -68,42 +69,42 @@ class User extends BaseUser
     protected function password(): Attribute
     {
         return new Attribute(
-            set: fn($value) => password_hash($value, PASSWORD_BCRYPT),
+            set: fn(string $value): string => password_hash($value, PASSWORD_BCRYPT),
         );
     }
 
     protected function createdAt(): Attribute
     {
         return new Attribute(
-            get: fn($value) => date('Y-m-d', strtotime($value)),
+            get: fn(string $value): string => date('Y-m-d', strtotime($value)),
         );
     }
 
     protected function updatedAt(): Attribute
     {
         return new Attribute(
-            get: fn($value) => date('Y-m-d', strtotime($value)),
+            get: fn(string $value): string => date('Y-m-d', strtotime($value)),
         );
     }
 
-    public static function actionRegister(): User
+    public static function actionRegister(): array
     {
-        $user = new static();
-        $user->save();
-        return $user;
+        return self::actionCreate();
     }
 
-    public static function actionLogin(array $attributes): array
+    public static function actionLogin(string $email, string $password): array
     {
         /** @var BaseUser $user */
 
-        AuthValidator::validate($attributes, [
-            'email' => 'check_email',
-            'password' => 'check_password'
+        $attributes = ['email' => $email, 'password' => $password];
+
+        AuthValidator::validateFirstFail($attributes, [
+            'email' => 'required|check_email',
+            'password' => 'required|check_password'
         ]);
 
         $user = self::query()
-            ->where('email', '=', $attributes['email'])
+            ->where('email', '=', $email)
             ->first();
 
         $umt = new UserMasterToken();
@@ -113,8 +114,10 @@ class User extends BaseUser
         $umrt = new UserMasterRefreshToken();
         $umrt->setSigningKey(config('app.service_key'));
         $umrt->setAuthIdentification($user->getAuthIdentifier());
-        $user->setAttribute('in_session', Carbon::now()->toDateTimeString());
-        $user->save();
+        var_dump($user);
+        $user->update(['in_session' => ['1' => Carbon::now()->toDateTimeString()]]);
+//        $user->setAttribute('in_session', Carbon::now()->toDateTimeString());
+//        $user->save();
 
         return [
             'user_master_token' => $umt->generateJWT(),

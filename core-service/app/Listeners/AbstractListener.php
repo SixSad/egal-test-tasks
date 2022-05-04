@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Listeners;
 
+use App\Events\AbstractServiceEvent;
 use Illuminate\Support\Facades\Log;
 
 abstract class AbstractListener
 {
     public function handle(AbstractServiceEvent $event): void
     {
-        Log::info('Listener: ' . get_class($this) . '. Event: ' . get_class($event));
+        Log::info(sprintf("Listener [%s] event [%s]", get_class($this), get_class($event)));
     }
 }

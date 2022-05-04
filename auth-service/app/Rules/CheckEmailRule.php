@@ -16,7 +16,7 @@ class CheckEmailRule extends EgalRule
 
     public function message(): string
     {
-        return ('Incorrect Email or password!');
+        return ('Incorrect Email');
     }
 
 }

@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Events\AbstractEvent;
 use App\Events\CreateUserEvent as CreateUserEvent;
-use App\Helpers\AbstractEvent;
-use App\Helpers\AbstractListener;
 use Egal\Model\Exceptions\ValidateException;
 use Exception;
 use Illuminate\Support\Str;
