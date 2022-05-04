@@ -33,10 +33,7 @@ class DebugModelServiceProvider extends ServiceProvider
     protected function scanModels(?string $dir = null): void
     {
         $baseDir = base_path('app/DebugModels/');
-
-        if ($dir === null) {
-            $dir = $baseDir;
-        }
+        $dir = $dir ?? $baseDir;
 
         $modelsNamespace = 'App\DebugModels\\';
 

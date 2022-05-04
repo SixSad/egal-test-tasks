@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
         $adminScheme = [
             'id' => Str::uuid(),
             'email' => 'admin@user.ru',
-            'password' => Hash::make('admin'),
+            'password' => 'admin',
         ];
 
         if (User::query()->where('email', $adminScheme['email'])->first()) {

@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         $userScheme = [
             'id' => Str::uuid(),
             'email' => 'user@user.ru',
-            'password' => Hash::make('user')
+            'password' =>'user'
         ];
 
         if (User::query()->where('email', $userScheme['email'])->first()) {
