@@ -2,40 +2,45 @@
 
 namespace App\Providers;
 
-use Egal\Model\Exceptions\LoadModelImpossiblyException;
+use Egal\Model\Metadata\ModelMetadata;
 use Egal\Model\ModelManager;
 use Illuminate\Support\ServiceProvider;
 
 class DebugModelServiceProvider extends ServiceProvider
 {
-    public string $class;
-    public bool $debugMode;
-    public string $dir;
+    protected array $models = [];
+    private array $config;
+    private string $nameSpace;
 
     public function __construct($app)
     {
         parent::__construct($app);
-        $this->setDir();
-        $this->setDebugModel();
-        $this->scanModels($this->dir);
+        $this->getConfig();
+        $this->getNameSpace();
+        $this->scanModels();
     }
 
-    protected function setDir()
+    private function getConfig()
     {
-        $this->dir = env('DEBUG_MODELS_ROOT');
+        $this->config = config("debugModel");
     }
 
-    protected function setDebugModel()
+    private function getNameSpace(): void
     {
-        $this->debugMode = env('DEBUG_MODELS_INCLUDE', false);
+        $splicedDirPath = explode("/", $this->config['debugDir']);
+
+        $updatedPath = array_map(fn($item) => ucfirst($item), $splicedDirPath);
+
+        $this->nameSpace = implode('\\', $updatedPath);
     }
 
     protected function scanModels(?string $dir = null): void
     {
-        $baseDir = base_path('app/DebugModels/');
+        $debugDir = $this->config['debugDir'];
+        $baseDir = base_path($debugDir);
         $dir = $dir ?? $baseDir;
 
-        $modelsNamespace = 'App\DebugModels\\';
+        $modelsNamespace = $this->nameSpace;
 
         foreach (scandir($dir) as $dirItem) {
             $itemPath = str_replace('//', '/', $dir . '/' . $dirItem);
@@ -61,19 +66,17 @@ class DebugModelServiceProvider extends ServiceProvider
             $class = str_replace($dir, '', $itemPath);
             $class = str_replace($dirItem, $classShortName, $class);
             $class = str_replace('/', '\\', $class);
-            $this->class = $modelsNamespace . $class;
+            $class = $modelsNamespace . $class;
+            $this->models[] = $class;
         }
     }
 
-    /**
-     * @return void
-     * @throws LoadModelImpossiblyException
-     */
     public function register(): void
     {
-        if ($this->debugMode) {
-            ModelManager::loadModel($this->class);
-            $this->commands([]);
+        if ($this->config['include']) {
+            foreach ($this->models as $model) {
+                ModelManager::loadModel($model);
+            }
         }
     }
 }

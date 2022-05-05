@@ -114,10 +114,16 @@ class User extends BaseUser
         $umrt = new UserMasterRefreshToken();
         $umrt->setSigningKey(config('app.service_key'));
         $umrt->setAuthIdentification($user->getAuthIdentifier());
-        var_dump($user);
-        $user->update(['in_session' => ['1' => Carbon::now()->toDateTimeString()]]);
-//        $user->setAttribute('in_session', Carbon::now()->toDateTimeString());
+
+//        $inSession = $user->getAttribute('in_session');
+//        array_push($inSession, Carbon::now()->toDateTimeString());
+//        $user->setAttribute('in_session', $inSession);
 //        $user->save();
+
+        $inSession = $user->getAttribute('in_session');
+        $inSession[] = [count($inSession) => Carbon::now()->toDateTimeString()];
+        $user->setAttribute('in_session', $inSession);
+        $user->save();
 
         return [
             'user_master_token' => $umt->generateJWT(),
