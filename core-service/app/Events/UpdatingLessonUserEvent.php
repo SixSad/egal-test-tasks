@@ -3,23 +3,19 @@
 namespace App\Events;
 
 use App\Models\LessonUser;
-use Egal\Core\Events\Event;
-use Illuminate\Queue\SerializesModels;
+use Egal\Core\Session\Session;
 
-class UpdatingLessonUserEvent extends Event
+class UpdatingLessonUserEvent extends AbstractServiceEvent
 {
-
-    use SerializesModels;
-
-    public LessonUser $lessonUser;
+    public array $attributes;
 
     public function __construct(LessonUser $lessonUser)
     {
-        $this->lessonUser = $lessonUser;
+        parent::__construct($lessonUser);
     }
 
-    public function getModel(): LessonUser
+    public function getAttributes(): array
     {
-        return $this->lessonUser ;
+        return $this->attributes;
     }
 }

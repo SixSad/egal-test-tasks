@@ -15,12 +15,9 @@ class UniqueCourseUserRule extends EgalRule
         $course = CourseUser::query()->where([
             "user_id" => $uuid,
             "course_id" => $value,
-        ])->first();
+        ])->exists();
 
-        if ($course) {
-            return false;
-        }
-        return true;
+        return !$course;
     }
 
     public function message(): string

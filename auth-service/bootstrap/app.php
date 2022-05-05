@@ -54,6 +54,7 @@ $app->singleton(Illuminate\Contracts\Console\Kernel::class, App\Console\Kernel::
 */
 
 $app->configure('app');
+$app->configure('debugModel');
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ $app->configure('app');
 $app->register(Egal\Core\ServiceProvider::class);
 $app->register(Egal\Model\ServiceProvider::class);
 $app->register(Egal\AuthServiceDependencies\ServiceProvider::class);
-//$app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\DebugModelServiceProvider::class);
 
 return $app;

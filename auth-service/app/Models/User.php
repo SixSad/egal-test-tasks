@@ -3,27 +3,31 @@
 namespace App\Models;
 
 use App\Events\CreateUserEvent;
-use App\Exceptions\EmptyPasswordException;
-use App\Exceptions\PasswordHashException;
+use App\Events\LoginValidateEvent;
+use App\Helpers\AuthValidator;
+use Carbon\Carbon;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
 use Egal\Auth\Tokens\UserMasterToken;
-use Egal\Auth\Tokens\UserServiceToken;
-use Egal\AuthServiceDependencies\Exceptions\LoginException;
-use Egal\AuthServiceDependencies\Exceptions\UserNotIdentifiedException;
-use Egal\AuthServiceDependencies\Models\User as BaseUser;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Egal\AuthServiceDependencies\{
+    Models\User as BaseUser
+};
+use Illuminate\Database\Eloquent\{
+    Casts\Attribute,
+    Factories\HasFactory,
+    Relations\BelongsToMany
+};
 use Illuminate\Support\Collection;
 use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property $id            {@property-type field}  {@primary-key}
- * @property $email         {@property-type field}  {@validation-rules required|string|email|unique:users,email}
- * @property $password      {@property-type field}  {@validation-rules required|string}
+ * @property $email         {@property-type field}
+ * @property $password      {@property-type field}
  * @property $phone         {@property-type fake-field}
- * @property $first_name         {@property-type fake-field}
- * @property $last_name         {@property-type fake-field}
+ * @property $first_name    {@property-type fake-field}
+ * @property $last_name     {@property-type fake-field}
+ * @property $in_session    {@property-type field}
  * @property $created_at    {@property-type field}
  * @property $updated_at    {@property-type field}
  *
@@ -49,43 +53,59 @@ class User extends BaseUser
         'last_name',
         'first_name'
     ];
+
     protected $hidden = [
         'password',
     ];
+
+    protected $casts = [
+        'in_session' => 'array',
+    ];
+
     protected $dispatchesEvents = [
         'creating' => CreateUserEvent::class,
     ];
 
-    public static function actionRegister(array $attributes = []): User
+    protected function password(): Attribute
     {
-        if (!$attributes['password']) {
-            throw new EmptyPasswordException();
-        }
+        return new Attribute(
+            set: fn(string $value): string => password_hash($value, PASSWORD_BCRYPT),
+        );
+    }
 
-        $user = new static();
-        $user->setAttribute('email', $attributes['email']);
-        $hashedPassword = password_hash($attributes['password'], PASSWORD_BCRYPT);
+    protected function createdAt(): Attribute
+    {
+        return new Attribute(
+            get: fn(string $value): string => date('Y-m-d', strtotime($value)),
+        );
+    }
 
-        if (!$hashedPassword) {
-            throw new PasswordHashException();
-        }
+    protected function updatedAt(): Attribute
+    {
+        return new Attribute(
+            get: fn(string $value): string => date('Y-m-d', strtotime($value)),
+        );
+    }
 
-        $user->setAttribute('password', $hashedPassword);
-        $user->save();
-
-        return $user;
+    public static function actionRegister(): array
+    {
+        return self::actionCreate();
     }
 
     public static function actionLogin(string $email, string $password): array
     {
         /** @var BaseUser $user */
+
+        $attributes = ['email' => $email, 'password' => $password];
+
+        AuthValidator::validateFirstFail($attributes, [
+            'email' => 'required|check_email',
+            'password' => 'required|check_password'
+        ]);
+
         $user = self::query()
             ->where('email', '=', $email)
             ->first();
-
-        if (!$user || !password_verify($password, $user->getAttribute('password'))) {
-            throw new LoginException('Incorrect Email or password!');
-        }
 
         $umt = new UserMasterToken();
         $umt->setSigningKey(config('app.service_key'));
@@ -94,6 +114,16 @@ class User extends BaseUser
         $umrt = new UserMasterRefreshToken();
         $umrt->setSigningKey(config('app.service_key'));
         $umrt->setAuthIdentification($user->getAuthIdentifier());
+
+//        $inSession = $user->getAttribute('in_session');
+//        array_push($inSession, Carbon::now()->toDateTimeString());
+//        $user->setAttribute('in_session', $inSession);
+//        $user->save();
+
+        $inSession = $user->getAttribute('in_session');
+        $inSession[] = [count($inSession) => Carbon::now()->toDateTimeString()];
+        $user->setAttribute('in_session', $inSession);
+        $user->save();
 
         return [
             'user_master_token' => $umt->generateJWT(),

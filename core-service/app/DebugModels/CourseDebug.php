@@ -1,14 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\DebugModels;
 
+use App\Models\Course;
 use Carbon\Carbon;
-use Egal\Model\Model as EgalModel;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Auth;
-use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 /**
  * @property int $id {@property-type field} {@prymary-key}
@@ -27,25 +22,7 @@ use Staudenmeir\EloquentHasManyDeep\HasRelationships;
  * @action update {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}
  * @action delete {@statuses-access logged} {@roles-access admin}{@permissions-access authenticate}
  */
-class Course extends EgalModel
+class CourseDebug extends Course
 {
-    use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'student_capacity',
-        'start_date',
-        'end_date',
-        'has_certificate'
-    ];
-
-    public function courseUsers(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'course_users','course_id','user_id');
-    }
-
-    public function lessons(): HasMany
-    {
-        return $this->hasMany(Lesson::class, 'course_id');
-    }
 }

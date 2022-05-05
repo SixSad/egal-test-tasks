@@ -2,21 +2,25 @@
 
 namespace App\Listeners;
 
+use App\Events\AbstractServiceEvent;
 use App\Events\UpdatedLessonUserEvent;
-use App\Exceptions\AlreadyPassedException;
-use App\Models\Course;
 use App\Models\CourseUser;
 use App\Models\Lesson;
 use App\Models\LessonUser;
+use Egal\Model\Exceptions\NotFoundException;
 
-
-class CalculatingPassingPercentageListener
+class CalculatingPassingPercentageListener extends AbstractListener
 {
-
-    public function handle(UpdatedLessonUserEvent $event): void
+    /**
+     * @param UpdatedLessonUserEvent $event
+     * @return void
+     * @throws NotFoundException
+     */
+    public function handle(AbstractServiceEvent $event): void
     {
+        parent::handle($event);
         $model = $event->getModel();
-        $course = Lesson::query()->find($model->getAttribute('lesson_id'))->course;
+        $course = Lesson::query()->findOrFail($model->getAttribute('lesson_id'))->course;
         $countLessons = $course->lessons->count();
 
         $courseUser = CourseUser::query()->where([

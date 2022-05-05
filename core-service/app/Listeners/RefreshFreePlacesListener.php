@@ -2,19 +2,19 @@
 
 namespace App\Listeners;
 
-use App\Events\CourseUserCreatedEvent;
+use App\Events\AbstractServiceEvent;
 use App\Models\Course;
 
-class RefreshFreePlacesListener
+class RefreshFreePlacesListener extends AbstractListener
 {
-
-    public function handle(CourseUserCreatedEvent $event): void
+    public function handle(AbstractServiceEvent $event): void
     {
+        parent::handle($event);
         $model = $event->getModel();
-        $course = Course::query()->firstWhere("id", $model->getAttribute('course_id'));
+        /** @var Course $course */
+        $course = Course::query()->findOrFail($model->getAttribute('course_id'));
         $course->update([
             'student_capacity' => $course->student_capacity - 1,
         ]);
     }
-
 }
