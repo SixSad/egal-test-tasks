@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "903f679bfa15f37c0084177ab433a805",
+    "content-hash": "ab4480ae55fabd260706a39ee858fbc9",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.5",
+            "version": "3.222.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "26596820b043db985bf7c9deb98aa2234f6054cb"
+                "reference": "cb1db65be035cc90de1019391bc3a57ca3cb1762"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/26596820b043db985bf7c9deb98aa2234f6054cb",
-                "reference": "26596820b043db985bf7c9deb98aa2234f6054cb",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/cb1db65be035cc90de1019391bc3a57ca3cb1762",
+                "reference": "cb1db65be035cc90de1019391bc3a57ca3cb1762",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.5"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.9"
             },
-            "time": "2022-05-04T20:25:34+00:00"
+            "time": "2022-05-10T18:14:43+00:00"
         },
         {
             "name": "brick/math",
@@ -1046,7 +1046,7 @@
         },
         {
             "name": "illuminate/auth",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/auth.git",
@@ -1103,7 +1103,7 @@
         },
         {
             "name": "illuminate/broadcasting",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/broadcasting.git",
@@ -1160,7 +1160,7 @@
         },
         {
             "name": "illuminate/bus",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/bus.git",
@@ -1213,7 +1213,7 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
@@ -1273,7 +1273,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1327,7 +1327,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -1375,7 +1375,7 @@
         },
         {
             "name": "illuminate/console",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
@@ -1435,7 +1435,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -1486,7 +1486,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1534,16 +1534,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "5a09b780d86613127cddbeb05e4dde22aeccbedf"
+                "reference": "cb2696e8f41e3770f1f30d623aebbb73644f34d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/5a09b780d86613127cddbeb05e4dde22aeccbedf",
-                "reference": "5a09b780d86613127cddbeb05e4dde22aeccbedf",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/cb2696e8f41e3770f1f30d623aebbb73644f34d9",
+                "reference": "cb2696e8f41e3770f1f30d623aebbb73644f34d9",
                 "shasum": ""
             },
             "require": {
@@ -1598,11 +1598,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-04-07T15:04:12+00:00"
+            "time": "2022-05-06T13:44:23+00:00"
         },
         {
             "name": "illuminate/encryption",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/encryption.git",
@@ -1653,7 +1653,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -1708,7 +1708,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -1770,7 +1770,7 @@
         },
         {
             "name": "illuminate/hashing",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/hashing.git",
@@ -1818,16 +1818,16 @@
         },
         {
             "name": "illuminate/http",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/http.git",
-                "reference": "409746b4af00f34c951fc4df6f49c6bc607b8481"
+                "reference": "f1a8fce0b426815733f42defaf1b32b420f8c759"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/http/zipball/409746b4af00f34c951fc4df6f49c6bc607b8481",
-                "reference": "409746b4af00f34c951fc4df6f49c6bc607b8481",
+                "url": "https://api.github.com/repos/illuminate/http/zipball/f1a8fce0b426815733f42defaf1b32b420f8c759",
+                "reference": "f1a8fce0b426815733f42defaf1b32b420f8c759",
                 "shasum": ""
             },
             "require": {
@@ -1872,11 +1872,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-04-25T18:16:36+00:00"
+            "time": "2022-05-03T18:18:29+00:00"
         },
         {
             "name": "illuminate/log",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/log.git",
@@ -1925,7 +1925,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1971,7 +1971,7 @@
         },
         {
             "name": "illuminate/pagination",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pagination.git",
@@ -2021,7 +2021,7 @@
         },
         {
             "name": "illuminate/pipeline",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/pipeline.git",
@@ -2069,7 +2069,7 @@
         },
         {
             "name": "illuminate/queue",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/queue.git",
@@ -2135,7 +2135,7 @@
         },
         {
             "name": "illuminate/session",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/session.git",
@@ -2191,16 +2191,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "3f1de19528fc235d666f73d540d13a684da6bf3a"
+                "reference": "89245b6e19017f627a35af3874ad9251b76b02cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/3f1de19528fc235d666f73d540d13a684da6bf3a",
-                "reference": "3f1de19528fc235d666f73d540d13a684da6bf3a",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/89245b6e19017f627a35af3874ad9251b76b02cc",
+                "reference": "89245b6e19017f627a35af3874ad9251b76b02cc",
                 "shasum": ""
             },
             "require": {
@@ -2255,11 +2255,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-04-11T14:26:37+00:00"
+            "time": "2022-05-09T16:28:53+00:00"
         },
         {
             "name": "illuminate/testing",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/testing.git",
@@ -2317,7 +2317,7 @@
         },
         {
             "name": "illuminate/translation",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/translation.git",
@@ -2369,16 +2369,16 @@
         },
         {
             "name": "illuminate/validation",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/validation.git",
-                "reference": "49b1cfd3a32f04255eed68fc1c304659de50e374"
+                "reference": "1c1daf9f87edd434a46b0a0aa147aa7939f3f04a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/validation/zipball/49b1cfd3a32f04255eed68fc1c304659de50e374",
-                "reference": "49b1cfd3a32f04255eed68fc1c304659de50e374",
+                "url": "https://api.github.com/repos/illuminate/validation/zipball/1c1daf9f87edd434a46b0a0aa147aa7939f3f04a",
+                "reference": "1c1daf9f87edd434a46b0a0aa147aa7939f3f04a",
                 "shasum": ""
             },
             "require": {
@@ -2425,11 +2425,11 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-02-01T16:13:18+00:00"
+            "time": "2022-05-10T13:43:44+00:00"
         },
         {
             "name": "illuminate/view",
-            "version": "v8.83.11",
+            "version": "v8.83.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/view.git",
@@ -2896,16 +2896,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.5.0",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "4192345e260f1d51b365536199744b987e160edc"
+                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/4192345e260f1d51b365536199744b987e160edc",
-                "reference": "4192345e260f1d51b365536199744b987e160edc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/247918972acd74356b0a91dfaa5adcaec069b6c0",
+                "reference": "247918972acd74356b0a91dfaa5adcaec069b6c0",
                 "shasum": ""
             },
             "require": {
@@ -2918,18 +2918,23 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "elasticsearch/elasticsearch": "^7",
+                "elasticsearch/elasticsearch": "^7 || ^8",
+                "ext-json": "*",
                 "graylog2/gelf-php": "^1.4.2",
+                "guzzlehttp/guzzle": "^7.4",
+                "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
                 "php-console/php-console": "^3.1.3",
-                "phpspec/prophecy": "^1.6.1",
+                "phpspec/prophecy": "^1.15",
                 "phpstan/phpstan": "^0.12.91",
-                "phpunit/phpunit": "^8.5",
+                "phpunit/phpunit": "^8.5.14",
                 "predis/predis": "^1.1",
                 "rollbar/rollbar": "^1.3 || ^2 || ^3",
-                "ruflin/elastica": ">=0.90@dev",
-                "swiftmailer/swiftmailer": "^5.3|^6.0"
+                "ruflin/elastica": "^7",
+                "swiftmailer/swiftmailer": "^5.3|^6.0",
+                "symfony/mailer": "^5.4 || ^6",
+                "symfony/mime": "^5.4 || ^6"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
@@ -2979,7 +2984,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/2.5.0"
+                "source": "https://github.com/Seldaek/monolog/tree/2.6.0"
             },
             "funding": [
                 {
@@ -2991,7 +2996,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-08T15:43:54+00:00"
+            "time": "2022-05-10T09:36:00+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -4379,6 +4384,88 @@
                 }
             ],
             "time": "2022-03-27T21:42:02+00:00"
+        },
+        {
+            "name": "sixsad/debug-models",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SixSad/debugModels.git",
+                "reference": "35d07345de8ef33ccd00afb332be774f9c82dab2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SixSad/debugModels/zipball/35d07345de8ef33ccd00afb332be774f9c82dab2",
+                "reference": "35d07345de8ef33ccd00afb332be774f9c82dab2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sixsad\\DebugModels\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SixSad",
+                    "email": "vizxs@bk.ru"
+                }
+            ],
+            "description": "Debug models package for lumenapp",
+            "support": {
+                "issues": "https://github.com/SixSad/debugModels/issues",
+                "source": "https://github.com/SixSad/debugModels/tree/master"
+            },
+            "time": "2022-05-11T06:53:48+00:00"
+        },
+        {
+            "name": "sixsad/helpers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SixSad/helpers.git",
+                "reference": "d030ae5183b4f90fa0e8b00b38065f9efe1c9174"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SixSad/helpers/zipball/d030ae5183b4f90fa0e8b00b38065f9efe1c9174",
+                "reference": "d030ae5183b4f90fa0e8b00b38065f9efe1c9174",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sixsad\\Helpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SixSad",
+                    "email": "vizxs@bk.ru"
+                }
+            ],
+            "description": "helpers for laravel microservices",
+            "support": {
+                "issues": "https://github.com/SixSad/helpers/issues",
+                "source": "https://github.com/SixSad/helpers/tree/master"
+            },
+            "time": "2022-05-11T05:32:25+00:00"
         },
         {
             "name": "symfony/console",
@@ -8541,7 +8628,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sixsad/debug-models": 20,
+        "sixsad/helpers": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

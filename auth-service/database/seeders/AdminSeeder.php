@@ -34,6 +34,7 @@ class AdminSeeder extends Seeder
         User::unsetEventDispatcher();
         $admin = User::query()->create($adminScheme);
         $admin->roles()->attach('admin');
+        $admin->roles()->attach('user');
         User::setEventDispatcher($dispatcher);
 
         $request = new \Egal\Core\Communication\Request(

@@ -8,6 +8,8 @@
         "php": "^8.0",
         "ext-json": "*",
         "egal/framework": "2.2.0",
+        "sixsad/debug-models": "dev-master",
+        "sixsad/helpers": "dev-master",
         "staudenmeir/eloquent-has-many-deep": "^1.13"
     },
     "require-dev": {

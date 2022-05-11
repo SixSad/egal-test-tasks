@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Helpers\SessionAttributes;
+use Sixsad\Helpers\SessionAttributes;
 use App\Events\AbstractServiceEvent;
 use App\Models\Lesson;
 use App\Models\LessonUser;

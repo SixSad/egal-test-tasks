@@ -3,8 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AbstractEvent;
-use App\Exceptions\EmptyPasswordException;
-use App\Helpers\AuthValidator;
+use Sixsad\Helpers\ServiceValidator;
 
 class ValidateAttributesListener extends AbstractListener
 {
@@ -14,7 +13,7 @@ class ValidateAttributesListener extends AbstractListener
         $attributes = $event->getAttributes();
         $model = $event->getModel();
 
-        AuthValidator::validate($attributes, [
+        ServiceValidator::validate($attributes, [
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:5|max:60',
             'phone' => 'required|max:255',

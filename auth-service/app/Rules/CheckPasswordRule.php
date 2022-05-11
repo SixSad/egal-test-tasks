@@ -23,7 +23,7 @@ class CheckPasswordRule extends EgalRule
 
     public function message(): string
     {
-        return ('Incorrect password!');
+        return ('Incorrect Email or password!');
     }
 
 }
