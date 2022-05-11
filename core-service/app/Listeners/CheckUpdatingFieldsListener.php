@@ -5,12 +5,12 @@ namespace App\Listeners;
 use App\Events\AbstractServiceEvent;
 use App\Models\LessonUser;
 use Egal\Model\Exceptions\ValidateException;
-use App\Helpers\CoreValidator;
 use App\Exceptions\{
     AlreadyPassedException,
     WrongAttibuteException,
     WrongLessonIdException,
 };
+use Sixsad\Helpers\ServiceValidator;
 
 class CheckUpdatingFieldsListener extends AbstractListener
 {
@@ -42,7 +42,7 @@ class CheckUpdatingFieldsListener extends AbstractListener
             throw new AlreadyPassedException();
         }
 
-        CoreValidator::validate($model->getAttributes(), [
+        ServiceValidator::validate($model->getAttributes(), [
             'lesson_id' => 'end_course',
         ]);
     }

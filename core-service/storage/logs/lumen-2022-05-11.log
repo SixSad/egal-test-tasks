@@ -1,0 +1,84 @@
+[2022-05-11 05:53:59] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 05:54:00] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 05:54:02] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:16:37] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:16:38] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:16:40] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:26:32] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:26:34] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:26:35] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:29:58] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:30:00] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 
+[2022-05-11 06:30:01] production.ERROR: Egal\Core\Application::getConfigurationPath(): Return value must be of type string, null returned {"exception":"[object] (TypeError(code: 0): Egal\\Core\\Application::getConfigurationPath(): Return value must be of type string, null returned at /app/vendor/egal/framework/src/Core/Application.php:41)
+[stacktrace]
+#0 /app/vendor/laravel/lumen-framework/src/Application.php(685): Egal\\Core\\Application->getConfigurationPath('debugModel')
+#1 /app/bootstrap/app.php(56): Laravel\\Lumen\\Application->configure('debugModel')
+#2 /app/artisan(18): require('/app/bootstrap/...')
+#3 {main}
+"} 

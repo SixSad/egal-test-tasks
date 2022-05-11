@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use App\Events\CreateUserEvent;
-use App\Events\LoginValidateEvent;
-use App\Helpers\AuthValidator;
+use Sixsad\Helpers\ServiceValidator;
 use Carbon\Carbon;
 use Egal\Auth\Tokens\UserMasterRefreshToken;
 use Egal\Auth\Tokens\UserMasterToken;
@@ -98,7 +97,7 @@ class User extends BaseUser
 
         $attributes = ['email' => $email, 'password' => $password];
 
-        AuthValidator::validateFirstFail($attributes, [
+        ServiceValidator::validateFirstFail($attributes, [
             'email' => 'required|check_email',
             'password' => 'required|check_password'
         ]);
@@ -114,11 +113,6 @@ class User extends BaseUser
         $umrt = new UserMasterRefreshToken();
         $umrt->setSigningKey(config('app.service_key'));
         $umrt->setAuthIdentification($user->getAuthIdentifier());
-
-//        $inSession = $user->getAttribute('in_session');
-//        array_push($inSession, Carbon::now()->toDateTimeString());
-//        $user->setAttribute('in_session', $inSession);
-//        $user->save();
 
         $inSession = $user->getAttribute('in_session');
         $inSession[] = [count($inSession) => Carbon::now()->toDateTimeString()];

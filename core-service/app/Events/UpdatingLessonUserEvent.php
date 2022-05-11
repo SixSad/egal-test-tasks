@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Models\LessonUser;
-use Egal\Core\Session\Session;
 
 class UpdatingLessonUserEvent extends AbstractServiceEvent
 {
