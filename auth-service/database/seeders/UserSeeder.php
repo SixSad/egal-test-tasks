@@ -29,14 +29,10 @@ class UserSeeder extends Seeder
         if (User::query()->where('email', $userScheme['email'])->first()) {
             return;
         }
-
-//        $user = User::withoutEvents(function () use ($userScheme) {
-//            $dispatcher User::unsetEventDispatcher();
-//            return User::query()->create($userScheme);
-//        });
         $dispatcher = User::getEventDispatcher();
         User::unsetEventDispatcher();
         $user = User::query()->create($userScheme);
+        $user->roles()->attach('user');
         User::setEventDispatcher($dispatcher);
 
         $request = new \Egal\Core\Communication\Request(
